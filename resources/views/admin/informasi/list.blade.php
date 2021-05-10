@@ -1,11 +1,13 @@
 @extends('admin/template')
 
 @push('scripts')
-    <script type="text/javascript">
-        $(document).ready(function() {
-        	$('#myTable').DataTable({"ordering": false});
-        });
-    </script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	$('#myTable').DataTable({"ordering": false});
+});
+
+</script>
 @endpush
 
 
@@ -42,12 +44,12 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <table class="table table-bordered" id="myTable">
+                        <table class="table table-bordered table-sm" id="myTable">
                             <thead>
                                 <tr>
                                     <th>Kode</th>
-                                    <th>Useradmin</th>
-                                    <th>Nama</th>
+                                    <th>Judul Informasi</th>
+                                    <th>Tanggal</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -55,12 +57,12 @@
                                 @foreach ($rows as $row)
 
                                     <tr>
-                                        <td>{{ $row->kodeadmin }}</td>
-                                        <td>{{ $row->useradmin }}</td>
-                                        <td>{{ $row->namaadmin }}</td>
+                                        <td>{{ $row->kodeinformasi }}</td>
+                                        <td>{{ $row->judulinformasi }}</td>
+                                        <td>{{ date('d F Y', strtotime($row->dateaddinformasi)) }}</td>
                                         <td>
-                                            <a class="btn btn-info btn-sm" href='{{ url("admin/$prefix/edit/$row->kodeadmin") }}'><i class="fa fa-edit"></i></a>
-                                            <a class="btn btn-danger btn-sm" onclick="return confirm('Hapus data {{ $row->kodeadmin }} ? ')" href='{{ url("admin/$prefix/acthapus/$row->kodeadmin") }}'><i class="fa fa-trash"></i></a>
+                                            <a class="btn btn-sm btn-info" href='{{ url("admin/$prefix/edit/$row->kodeinformasi") }}'><i class="fa fa-edit"></i></a>
+                                            <a class="btn btn-sm btn-danger" onclick="confirmDelete('Hapus data {{ $pagename }} dengan kode {{ $row->kodeinformasi }}', '{{ url("admin/$prefix/acthapus/$row->kodeinformasi") }}')" href="javascript:void(0)"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
 

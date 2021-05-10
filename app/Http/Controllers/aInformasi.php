@@ -15,17 +15,17 @@ use App\Lib\Cupload;
 use App\Lib\Cfilter;
 use App\Lib\Cview;
 
-use App\Http\Controllers\aAlatGym;
+use App\Http\Controllers\aInformasi;
 
-class aAlatGym extends Controller
+class aInformasi extends Controller
 {
 	public function __construct()
     {
 		// page data
 		$this->pesan = "";
-    	$this->baseTable = "tbl_alat_gym";
-    	$this->prefix = "alatgym";
-    	$this->pagename = "Alat Gym";
+    	$this->baseTable = "tbl_informasi";
+    	$this->prefix = "informasi";
+    	$this->pagename = "Informasi";
     }
 
     public function list(Request $request)
@@ -44,8 +44,8 @@ class aAlatGym extends Controller
 		// passing function ke view
 		$data['rows'] = DB::table($this->baseTable)
                         ->select('*')
-                        ->where('statusalatgym', '=', 1)
-						->orderBy('tbl_alat_gym.kodealatgym', 'desc')
+                        ->where('statusinformasi', '=', 1)
+						->orderBy('kodeinformasi', 'desc')
 						->get();
 
         return view("admin/$this->prefix/list", $data);
@@ -77,7 +77,7 @@ class aAlatGym extends Controller
 		// breadcrumb
 		$breadcrumb = array();
 		$breadcrumb []= "<li class='breadcrumb-item'><a href='".url("admin/dashboard")."'> Dashboard</a></li>";
-		$breadcrumb []= "<li class='breadcrumb-item'><a href='".url("admin/master/$this->prefix/list")."'>$this->pagename</a></li>";
+		$breadcrumb []= "<li class='breadcrumb-item'><a href='".url("admin/$this->prefix/list")."'>$this->pagename</a></li>";
 		$breadcrumb []= "<li class='breadcrumb-item'>Edit</li>";
 		$breadcrumb []= "<li class='breadcrumb-item'><b>$id</b></li>";
 		$data['breadcrumb'] = join($breadcrumb, "");
@@ -92,7 +92,7 @@ class aAlatGym extends Controller
 		$data['iserror'] = false;
 
         $data['rows'] = DB::table($this->baseTable)
-                        ->where('kodealatgym', '=', $id)
+                        ->where('kodeinformasi', '=', $id)
                         ->first();
 
         return view("admin/$this->prefix/tambah", $data);
@@ -108,19 +108,16 @@ class aAlatGym extends Controller
 
 		try
 		{
-            $kodealatgym = Csql::generateKode2("kodealatgym", date("Ymd")."-ALATGYM", $this->baseTable);
-
-            $gambaralatgym = Cupload::UploadGambar('gambaralatgym', '', $request);
+            $kodeinformasi = Csql::generateKode2("kodeinformasi", date("Ymd")."-INFORMASI", $this->baseTable);
 
 			DB::table($this->baseTable)->insert([[
-                'kodealatgym' => Cfilter::FilterString($kodealatgym),
+                'kodeinformasi' => Cfilter::FilterString($kodeinformasi),
                 'kodeadmin' => Cfilter::FilterString(session("kodeadmin")),
-                'namaalatgym' => Cfilter::FilterString($request->input('namaalatgym')),
-                'keteranganalatgym' => $request->input('keteranganalatgym'),
-                'gambaralatgym' => $gambaralatgym,
-                'statusalatgym' => 1,
-                'dateaddalatgym' => Cfilter::FilterString(date("Y-m-d H:i")),
-                'dateupdalatgym' => Cfilter::FilterString(date("Y-m-d H:i")),
+                'judulinformasi' => Cfilter::FilterString($request->input('judulinformasi')),
+                'isiinformasi' => $request->input('isiinformasi'),
+                'statusinformasi' => 1,
+                'dateaddinformasi' => Cfilter::FilterString(date("Y-m-d H:i")),
+                'dateupdinformasi' => Cfilter::FilterString(date("Y-m-d H:i")),
 			]]);
 
             DB::commit();
@@ -128,12 +125,12 @@ class aAlatGym extends Controller
 		} catch (\Exception $ex) {
 		    DB::rollback();
 			$this->pesaninfo = Cview::pesanGagal("Kesalahan Tambah Data : <b>".$ex->getMessage()."</b>");
-			return redirect()->action([aAlatGym::class, 'tambah'])->with('pesaninfo', $this->pesaninfo)->with('erroract', true)->withInput();
+			return redirect()->action([aInformasi::class, 'tambah'])->with('pesaninfo', $this->pesaninfo)->with('erroract', true)->withInput();
 		}
 
 		// jika berhasil
-		$this->pesaninfo = Cview::pesanSukses("Berhasil Tambah Data : <b>".$request->input('kodealatgym')."</b>");
-		return redirect()->action([aAlatGym::class, 'list'])->with('pesaninfo', $this->pesaninfo);
+		$this->pesaninfo = Cview::pesanSukses("Berhasil Tambah Data : <b>".$request->input('kodeinformasi')."</b>");
+		return redirect()->action([aInformasi::class, 'list'])->with('pesaninfo', $this->pesaninfo);
 
     }
 
@@ -145,31 +142,28 @@ class aAlatGym extends Controller
 
 		try {
 
-			$id = Cfilter::FilterString($request->input('kodealatgym'));
-			$gambaralatgym_old = Csql::cariData2('gambaralatgym', 'kodealatgym', $id, $this->baseTable);
-			$gambaralatgym = Cupload::UploadGambar('gambaralatgym', $gambaralatgym_old, $request);
+			$id = Cfilter::FilterString($request->input('kodeinformasi'));
 
 			// update user
 			DB::table($this->baseTable)
-	            ->where('kodealatgym', "=", $id)
+	            ->where('kodeinformasi', "=", $id)
 	            ->update
 	            ([
-		            'namaalatgym' => Cfilter::FilterString($request->input('namaalatgym')),
-		            'keteranganalatgym' => $request->input('keteranganalatgym'),
-                	'gambaralatgym' => $gambaralatgym,
-                	'dateupdalatgym' => Cfilter::FilterString(date("Y-m-d H:i")),
+		            'judulinformasi' => Cfilter::FilterString($request->input('judulinformasi')),
+		            'isiinformasi' => $request->input('isiinformasi'),
+                	'dateupdinformasi' => Cfilter::FilterString(date("Y-m-d H:i")),
 	            ]);
 
 		    DB::commit();
 		} catch (\Exception $ex) {
 		    DB::rollback();
 			$this->pesaninfo = Cview::pesanGagal("Kesalahan Update Data : <b>".$ex->getMessage()."</b>");
-			return redirect()->action([aAlatGym::class, 'edit'], ['id' => $id])->with('pesaninfo', $this->pesaninfo)->with('erroract', true)->withInput();
+			return redirect()->action([aInformasi::class, 'edit'], ['id' => $id])->with('pesaninfo', $this->pesaninfo)->with('erroract', true)->withInput();
 		}
 
 		// jika berhasil
-		$this->pesaninfo = Cview::pesanSukses("Berhasil Update Data : <b>".$request->input('kodealatgym')."</b>");
-		return redirect()->action([aAlatGym::class, 'edit'], ['id' => $id])->with('pesaninfo', $this->pesaninfo);
+		$this->pesaninfo = Cview::pesanSukses("Berhasil Update Data : <b>".$request->input('kodeinformasi')."</b>");
+		return redirect()->action([aInformasi::class, 'edit'], ['id' => $id])->with('pesaninfo', $this->pesaninfo);
 
     }
 
@@ -180,14 +174,14 @@ class aAlatGym extends Controller
         try
         {
         	DB::table($this->baseTable)
-	            ->where('kodealatgym', "=", $id)
+	            ->where('kodeinformasi', "=", $id)
 	            ->update
 	            ([
-		            'statusalatgym' => Cfilter::FilterInt(2),
+		            'statusinformasi' => Cfilter::FilterInt(2),
 	            ]);
 
             // DB::table($this->baseTable)
-            //     ->where('kodealatgym', '=', $id)
+            //     ->where('kodeinformasi', '=', $id)
             //     ->delete();
 
 		    DB::commit();
@@ -195,12 +189,12 @@ class aAlatGym extends Controller
 		} catch (\Exception $ex) {
 		    DB::rollback();
 			$this->pesaninfo = Cview::pesanGagal("Kesalahan Hapus Data : <b>".$ex->getMessage()."</b>");
-			return redirect()->action([aAlatGym::class, 'list'])->with('pesaninfo', $this->pesaninfo)->with('erroract', true)->withInput();
+			return redirect()->action([aInformasi::class, 'list'])->with('pesaninfo', $this->pesaninfo)->with('erroract', true)->withInput();
 		}
 
 		// jika berhasil
 		$this->pesaninfo = Cview::pesanSukses("Berhasil Hapus Data : <b>".$id."</b>");
-		return redirect()->action([aAlatGym::class, 'list'])->with('pesaninfo', $this->pesaninfo);
+		return redirect()->action([aInformasi::class, 'list'])->with('pesaninfo', $this->pesaninfo);
     }
 
     

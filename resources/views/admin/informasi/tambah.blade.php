@@ -4,9 +4,9 @@
     <script type="text/javascript">
         $(document).ready(function() {
 
-            $("#kodealatgym").addClass("disable");
+            $("#kodeinformasi").addClass("disable");
 
-            $('#keteranganalatgym').summernote({
+            $('#isiinformasi').summernote({
                 placeholder: 'masukkan data.',
                 tabsize: 2,
                 height: 200,
@@ -29,37 +29,30 @@
 
                 @php
                     $mode = "UPDATE";
-                    $keteranganalatgym = $rows->keteranganalatgym;
+                    $isiinformasi = $rows->isiinformasi;
                 @endphp
 
-                $("#kodealatgym").addClass("disable");
-                $("#kodealatgym").val("{{ $rows->kodealatgym }}");
-                $("#namaalatgym").val("{{ $rows->namaalatgym }}");
-
-                @if($rows->gambaralatgym != "")
-                    $("#gambarview").attr("src", "{{ url("gambar/$rows->gambaralatgym") }}");
-                @else
-                    $("#gambarview").attr("src", "{{ url('gambar/noimage.jpg') }}");
-                @endif
+                $("#kodeinformasi").addClass("disable");
+                $("#kodeinformasi").val("{{ $rows->kodeinformasi }}");
+                $("#judulinformasi").val("{{ $rows->judulinformasi }}");
 
             // DATA BARU
             @elseif($aksi == "acttambah")
 
                 @php
                     $mode = "ADD";
-                    $keteranganalatgym = "";
+                    $isiinformasi = "";
                 @endphp
-
-                $("#gambarview").attr("src", "{{ url('gambar/noimage.jpg') }}");
 
             @endif
 
             // =========== jika ada error
             @if(session('erroract'))
-                $("#kodealatgym").val("{{ old('kodealatgym') }}");
-                $("#namaalatgym").val("{{ old('namaalatgym') }}");
+                $("#kodeinformasi").val("{{ old('kodeinformasi') }}");
+                $("#judulinformasi").val("{{ old('judulinformasi') }}");
+
                 @php
-                    $keteranganalatgym = old('keteranganalatgym');
+                    $isiinformasi = old('isiinformasi');
                 @endphp
             @endif
 
@@ -69,9 +62,9 @@
 
             $("#simpan").click(function() {
 
-                if($("#namaalatgym").val() == "")
+                if($("#judulinformasi").val() == "")
                 {
-                    toastr.error('nama [namaalatgym] kosong');
+                    toastr.error('nama [judulinformasi] kosong');
                 }
                 else
                 {
@@ -124,24 +117,18 @@
                         @csrf
 
                         <div class="form-group">
-                            <label for="kodealatgym">Kode</label>
-                            <input class="form-control" id="kodealatgym" name="kodealatgym" type="text" placeholder="AUTO">
+                            <label for="kodeinformasi">Kode</label>
+                            <input class="form-control" id="kodeinformasi" name="kodeinformasi" type="text" placeholder="AUTO">
                         </div>
 
                         <div class="form-group">
-                            <label for="namaalatgym">Nama Alat Gym</label>
-                            <input type="text" class="form-control" id="namaalatgym" name="namaalatgym" placeholder="masukkan data">
+                            <label for="judulinformasi">Judul Informasi</label>
+                            <input type="text" class="form-control" id="judulinformasi" name="judulinformasi" placeholder="masukkan data">
                         </div>
 
                         <div class="form-group">
-                            <label for="keteranganalatgym">Keterangan Item</label>
-                            <textarea rows="5" class="form-control" id="keteranganalatgym" name="keteranganalatgym" placeholder="masukkan data">{{ $keteranganalatgym }}</textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Gambar</label>
-                            <input type="file" id="gambaralatgym" name="gambaralatgym"><br />
-                            <img src="" id="gambarview" style="width: 200px; border-radius: 10px;">
+                            <label for="isiinformasi">Keterangan Item</label>
+                            <textarea rows="5" class="form-control" id="isiinformasi" name="isiinformasi" placeholder="masukkan data">{{ $isiinformasi }}</textarea>
                         </div>
 
                         </form>

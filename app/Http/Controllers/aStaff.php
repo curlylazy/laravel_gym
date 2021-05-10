@@ -61,7 +61,7 @@ class aStaff extends Controller
 		// breadcrumb
 		$breadcrumb = array();
 		$breadcrumb []= "<li class='breadcrumb-item'><a href='".url("admin/dashboard")."'>Dashboard</a></li>";
-		$breadcrumb []= "<li class='breadcrumb-item'><a href='".url("admin/master/$this->prefix/list")."'>$this->pagename</a></li>";
+		$breadcrumb []= "<li class='breadcrumb-item'><a href='".url("admin/$this->prefix/list")."'>$this->pagename</a></li>";
 		$breadcrumb []= "<li class='breadcrumb-item'>Tambah</li>";
 		$data['breadcrumb'] = join($breadcrumb, "");
 

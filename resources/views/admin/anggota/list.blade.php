@@ -46,8 +46,11 @@
                             <thead>
                                 <tr>
                                     <th>Kode</th>
-                                    <th>Useradmin</th>
+                                    <th>Useranggota</th>
                                     <th>Nama</th>
+                                    <th>JK</th>
+                                    <th>Telepon</th>
+                                    <th>Alamat</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -55,12 +58,15 @@
                                 @foreach ($rows as $row)
 
                                     <tr>
-                                        <td>{{ $row->kodeadmin }}</td>
-                                        <td>{{ $row->useradmin }}</td>
-                                        <td>{{ $row->namaadmin }}</td>
+                                        <td>{{ $row->kodeanggota }}</td>
+                                        <td>{{ $row->useranggota }}</td>
+                                        <td>{{ $row->namaanggota }}</td>
+                                        <td>{{ $row->jk }}</td>
+                                        <td>{{ $row->noteleponanggota }}</td>
+                                        <td>{{ $row->alamatanggota }}</td>
                                         <td>
-                                            <a class="btn btn-info btn-sm" href='{{ url("admin/$prefix/edit/$row->kodeadmin") }}'><i class="fa fa-edit"></i></a>
-                                            <a class="btn btn-danger btn-sm" onclick="return confirm('Hapus data {{ $row->kodeadmin }} ? ')" href='{{ url("admin/$prefix/acthapus/$row->kodeadmin") }}'><i class="fa fa-trash"></i></a>
+                                            <a class="btn btn-info btn-sm" href='{{ url("admin/$prefix/edit/$row->kodeanggota") }}'><i class="fa fa-edit"></i></a>
+                                            <a class="btn btn-danger btn-sm" onclick="return confirm('Hapus data {{ $row->kodeanggota }} ? ')" href='{{ url("admin/$prefix/acthapus/$row->kodeanggota") }}'><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
 

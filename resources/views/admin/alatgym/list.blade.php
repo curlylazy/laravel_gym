@@ -44,7 +44,7 @@ $(document).ready(function() {
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <table class="table table-responsive-sm table-sm" id="myTable">
+                        <table class="table table-bordered table-sm" id="myTable">
                             <thead>
                                 <tr>
                                     <th>Kode</th>
@@ -59,8 +59,8 @@ $(document).ready(function() {
                                         <td>{{ $row->kodealatgym }}</td>
                                         <td>{{ $row->namaalatgym }}</td>
                                         <td>
-                                            <a class="btn btn-info" href='{{ url("admin/$prefix/edit/$row->kodealatgym") }}'><i class="fa fa-edit"></i></a>
-                                            <a class="btn btn-danger" onclick="confirmDelete('Hapus data {{ $pagename }} dengan kode {{ $row->kodealatgym }}', '{{ url("admin/$prefix/acthapus/$row->kodealatgym") }}')" href="javascript:void(0)"><i class="fa fa-trash"></i></a>
+                                            <a class="btn btn-sm btn-info" href='{{ url("admin/$prefix/edit/$row->kodealatgym") }}'><i class="fa fa-edit"></i></a>
+                                            <a class="btn btn-sm btn-danger" onclick="confirmDelete('Hapus data {{ $pagename }} dengan kode {{ $row->kodealatgym }}', '{{ url("admin/$prefix/acthapus/$row->kodealatgym") }}')" href="javascript:void(0)"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
 

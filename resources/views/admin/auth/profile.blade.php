@@ -113,7 +113,7 @@
 
                     </div>
                     <div class="card-footer">
-                        <a class="btn btn-sm btn-primary" href='{{ url("admin/$prefix/list") }}'><i class="fa fa-backward"></i> KEMBALI</a>
+                        <a class="btn btn-sm btn-primary" href='{{ url("admin/dashboard") }}'><i class="fa fa-backward"></i> KEMBALI</a>
                         <button class="btn btn-sm btn-info" type="button" id="simpan"><i class="fa fa-save"></i> SIMPAN</button>
                     </div>
                 </div>

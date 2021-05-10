@@ -40,6 +40,12 @@
 						<p>Informasi</p>
 					</a>
 	        	</li>
+	        	<li class="nav-item">
+					<a href="{{ url('admin/anggota/list') }}" class="nav-link">
+						<i class="nav-icon fas fa-users"></i>
+						<p>Anggota</p>
+					</a>
+	        	</li>
 	        	
 
 	        	<!-- TRANSAKSI ================================= -->
