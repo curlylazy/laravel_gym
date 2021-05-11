@@ -95,8 +95,10 @@ Route::any('/admin/informasi/acthapus/{id}', [aInformasi::class, 'acthapus']);
 
 // Anggota
 Route::any('/admin/anggota/list', [aAnggota::class, 'list']);
+Route::any('/admin/anggota/informasi', [aAnggota::class, 'informasi']);
 Route::any('/admin/anggota/tambah', [aAnggota::class, 'tambah']);
 Route::any('/admin/anggota/edit/{id}', [aAnggota::class, 'edit']);
+Route::any('/admin/anggota/detail/{id}', [aAnggota::class, 'detail']);
 Route::any('/admin/anggota/acttambah', [aAnggota::class, 'acttambah']);
 Route::any('/admin/anggota/actedit', [aAnggota::class, 'actedit']);
 Route::any('/admin/anggota/acthapus/{id}', [aAnggota::class, 'acthapus']);

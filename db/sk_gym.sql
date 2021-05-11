@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 10 Bulan Mei 2021 pada 11.04
+-- Waktu pembuatan: 11 Bulan Mei 2021 pada 11.04
 -- Versi server: 10.4.10-MariaDB
 -- Versi PHP: 7.3.12
 
@@ -100,8 +100,9 @@ CREATE TABLE `tbl_anggota` (
 --
 
 INSERT INTO `tbl_anggota` (`kodeanggota`, `useranggota`, `password`, `namaanggota`, `noteleponanggota`, `alamatanggota`, `jk`, `tanggalaktifsampai`, `statusanggota`, `gambaranggota`, `dateaddanggota`, `dateupdanggota`) VALUES
-('20210510-ANGGOTA001', 'saputrastyawan.d@gmail.com', 'eyJpdiI6IlNOdHFjUHl3NG9DenZ3TnNtVHBzSHc9PSIsInZhbHVlIjoiQ2NwSUlyakFSZ0pFNGc2bUMyVUd2UT09IiwibWFjIjoiOTY0MTFhYmY3ZjUyNWU2MzhhNjNjMDIwNmNjNTYxZGRmNWZjYzRlZDM0MTcyYmRlNWMxMDRlZmNhNjk1ZGY1OCJ9', 'Saputra Styawan', '08636677384', 'Jalan Campuan Asri Blok BB no 67', 'L', NULL, 1, '', '2021-05-10 09:01:00', '2021-05-10 09:01:00'),
-('20210510-ANGGOTA002', 'arka@gmail.com', 'eyJpdiI6Ims0NDA1dTl1eGNNbERUZTVYRWNQaGc9PSIsInZhbHVlIjoiUkNjS3FZZU5IU0JTaGhEUWdBQ1doQT09IiwibWFjIjoiNTkwNWI4OTY2OGJmMmE3MDBjZWM0ZGJmZDA4OWFjNzExODliZDdhMjZmNDBiNjI2NjNmZTFhYzBmYmEzODFlMCJ9', 'Putu Arka Ardian', '08563735581', 'Jalan Pulau Biru No 68', 'L', NULL, 1, 'pic_1620637426_userbaby.jpeg', '2021-05-10 09:03:00', '2021-05-10 09:03:00');
+('20210510-ANGGOTA001', 'saputrastyawan.d@gmail.com', 'eyJpdiI6IjJBb0hrOFFGdkRlbGVCZUZOK2JMamc9PSIsInZhbHVlIjoienZOenJCTzVnUzNPVHlGMlRWRVY4QT09IiwibWFjIjoiMDc0OGUyZTBiZjkwNDZkZjMzZjk2N2NmNDhmYzIxYzAyMzJhZTdiNWEwNzZkODk5MzZjOGI0ODdjNzE2NjE3ZSJ9', 'Saputra Styawan', '08636677384', 'Jalan Campuan Asri Blok BB no 67', 'L', NULL, 1, 'pic_1620722535_Andri_Andri.jpg', '2021-05-10 09:01:00', '2021-05-11 08:42:00'),
+('20210510-ANGGOTA002', 'arka@gmail.com', 'eyJpdiI6Ims0NDA1dTl1eGNNbERUZTVYRWNQaGc9PSIsInZhbHVlIjoiUkNjS3FZZU5IU0JTaGhEUWdBQ1doQT09IiwibWFjIjoiNTkwNWI4OTY2OGJmMmE3MDBjZWM0ZGJmZDA4OWFjNzExODliZDdhMjZmNDBiNjI2NjNmZTFhYzBmYmEzODFlMCJ9', 'Putu Arka Ardian', '08563735581', 'Jalan Pulau Biru No 68', 'L', NULL, 1, 'pic_1620637426_userbaby.jpeg', '2021-05-10 09:03:00', '2021-05-10 09:03:00'),
+('20210511-ANGGOTA003', 'chandra@gmail.com', 'eyJpdiI6ImR5a01laDNJSE55RlROZDNOQTFzMFE9PSIsInZhbHVlIjoiVEhwamczem0wTFBiODhSLy9uT0ROZz09IiwibWFjIjoiZTgwM2FmMjM2ZWI0YjExYWQzZTdmMDJhZDZiMmZhYzA5MmFiNDU4OTdhYjM5YjJhMzJmZGNkN2YwNmFhZWY5YiJ9', 'Ni Nyoman Chandra Dewi', '08563735581', 'Jalan Campuan Asri Blok BB no 67', 'L', NULL, 1, 'pic_1620722511_images.jpg', '2021-05-11 08:41:00', '2021-05-11 08:41:00');
 
 -- --------------------------------------------------------
 

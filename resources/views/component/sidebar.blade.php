@@ -51,7 +51,7 @@
 	        	<!-- TRANSAKSI ================================= -->
 	        	<li class="nav-header">Transaksi</li>
 	        	<li class="nav-item">
-					<a href="{{ url('admin/infoanggota') }}" class="nav-link">
+					<a href="{{ url('admin/anggota/informasi') }}" class="nav-link">
 						<i class="nav-icon fas fa-info"></i>
 						<p>Informasi Anggota</p>
 					</a>

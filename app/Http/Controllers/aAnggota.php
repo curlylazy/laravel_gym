@@ -52,6 +52,29 @@ class aAnggota extends Controller
         return view("admin/$this->prefix/list", $data);
     }
 
+    public function informasi(Request $request)
+    {
+		// breadcrumb
+		$breadcrumb = array();
+		$breadcrumb []= "<li class='breadcrumb-item'><a href='".url("admin/dashboard")."'>Dashboard</a></li>";
+		$breadcrumb []= "<li class='breadcrumb-item active'>$this->pagename</li>";
+		$breadcrumb []= "<li class='breadcrumb-item active'>List</li>";
+		$data['breadcrumb'] = join($breadcrumb, "");
+
+		// Judul Halaman
+		$data['prefix'] = $this->prefix;
+		$data['pagename'] = $this->pagename;
+
+		// passing function ke view
+		$data['rows'] = DB::table($this->baseTable)
+                        ->select('*')
+                        ->where('statusanggota', '=', 1)
+						->orderBy('kodeanggota', 'desc')
+						->get();
+
+        return view("admin/$this->prefix/informasi", $data);
+    }
+
 	public function tambah()
     {
 		// breadcrumb
@@ -99,6 +122,33 @@ class aAnggota extends Controller
         $data['password'] = Crypt::decryptString($data['rows']->password);
 
         return view("admin/$this->prefix/tambah", $data);
+    }
+
+    public function detail($id)
+    {
+		// breadcrumb
+		$breadcrumb = array();
+		$breadcrumb []= "<li class='breadcrumb-item'><a href='".url("admin/dashboard")."'> Dashboard</a></li>";
+		$breadcrumb []= "<li class='breadcrumb-item'><a href='".url("admin/$this->prefix/list")."'>$this->pagename</a></li>";
+		$breadcrumb []= "<li class='breadcrumb-item'>Edit</li>";
+		$breadcrumb []= "<li class='breadcrumb-item'><b>$id</b></li>";
+		$data['breadcrumb'] = join($breadcrumb, "");
+
+		// Judul Halaman
+		$data['prefix'] = $this->prefix;
+		$data['pagename'] = $this->pagename;
+
+		// paramerter error
+		$data['pesaninfo'] = "";
+		$data['iserror'] = false;
+
+        $data['rows'] = DB::table($this->baseTable)
+                        ->where('kodeanggota', '=', $id)
+                        ->first();
+
+        $data['password'] = Crypt::decryptString($data['rows']->password);
+
+        return view("admin/$this->prefix/detail", $data);
     }
 
     public function acttambah(Request $request)
