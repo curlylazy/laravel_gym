@@ -101,7 +101,7 @@
                                     <li><a href='{{ url("auth/profile") }}'>Profile</a></li>
                                     <li><a href='{{ url("pembayaran/list") }}'>Pembayaran</a></li>
                                     <li><a href='{{ url("kartuanggota") }}'>Kartu Anggota</a></li>
-                                    <li><a href='{{ url("historykunjungan") }}'>History</a></li>
+                                    <li><a href='{{ url("kunjungan") }}'>Kunjungan</a></li>
                                     <li><a href='{{ url("auth/logout") }}'>Log Out</a></li>
                                 @endif
 

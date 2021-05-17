@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 17 Bulan Mei 2021 pada 11.02
+-- Waktu pembuatan: 17 Bulan Mei 2021 pada 11.05
 -- Versi server: 10.4.10-MariaDB
 -- Versi PHP: 7.3.12
 
@@ -159,6 +159,8 @@ CREATE TABLE `tbl_kunjungan` (
   `kodekunjungan` varchar(25) DEFAULT NULL,
   `kodeanggota` varchar(25) DEFAULT NULL,
   `kodeadmin` varchar(25) DEFAULT NULL,
+  `waktudatang` datetime DEFAULT NULL,
+  `waktupulang` datetime DEFAULT NULL,
   `dateaddkunjungan` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
