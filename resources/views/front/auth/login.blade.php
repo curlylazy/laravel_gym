@@ -5,7 +5,21 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
+    $("#login").click(function() {
 
+        if($("#useranggota").val() == "")
+        {
+            Swal.fire("PERINGATAN", "[useranggota] kosong", "warning");
+        }
+        else if($("#password").val() == "")
+        {
+            Swal.fire("PERINGATAN", "[password] kosong", "warning");
+        }
+        else
+        {
+            $("#form1").submit();
+        }
+    });
 });
 
 </script>
@@ -15,57 +29,57 @@ $(document).ready(function() {
 
 @section('content')
 
-<section class="py-3 bg-light" style="background:linear-gradient(0deg, rgba(0 0 0 / 30%), rgba(0 25 49)), url({{ asset('cssfront/img/banner_2.jpg') }}); background-position: center; background-size: cover;">
+<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url({{ asset('cssfront/images/img_bg_3.jpg') }}); height: 200px;" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
     <div class="container">
-        <div class="row px-4 px-lg-5 py-lg-4 align-items-center">
-            <div class="col-lg-6">
-                <h1 class="h2 text-uppercase mb-0" style="color: white">Login</h1>
-            </div>
-            <div class="col-lg-6 text-lg-right">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb justify-content-lg-end mb-0 px-0" style="background: none;">
-                        <li class="breadcrumb-item" style="color: white"><a href="{{ url('/') }}">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Login</li>
-                    </ol>
-                </nav>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-center" style="margin-top: 50px;">
+                <h1 style="color: white;">LOGIN</h1>
             </div>
         </div>
     </div>
-</section>
+</header>
 
-<section class="py-3 bg-light mt-2">
+<div id="fh5co-contact">
     <div class="container">
-        
-        @if(session('erroract'))
-            <div class="row">
-                <div class="col-lg-8 col-md-10 mx-auto">
-                    {!! session('pesaninfo') !!}
-                </div>
-            </div>
-        @endif
 
         <div class="row">
-            <div class="col-lg-7 col-md-7 mx-auto">
-                <form id="form1" method="post" action='{{ url("auth/actlogin") }}'>
+            <div class="col-md-8 col-md-offset-2 mx-auto">
+                @if(!empty(session('pesaninfo')))
+                    {!! session('pesaninfo') !!}
+                @endif
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 animate-box">
+                <form enctype="multipart/form-data" action='{{ url("auth/actlogin") }}' id="form1" method="post">
 
                     @csrf
 
-                    <div class="form-group">
-                        <label for="userpelanggan">Username</label>
-                        <input type="text" class="form-control" id="userpelanggan" name="userpelanggan" placeholder="masukkan user pelanggan">
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label for="useranggota">User Anggota</label>
+                            <input type="text" class="form-control" id="useranggota" name="useranggota" placeholder="user anggota">
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label for="password">Password</label>
+                            <input type="text" class="form-control" id="password" name="password" placeholder="password">
+                        </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="userpelanggan">Password</label>
-                        <input type="text" class="form-control" id="passwordpelanggan" name="passwordpelanggan" placeholder="masukkan password">
+                        <button type="button" id="login" class="btn btn-primary">LOGIN</button>
+                        <a type="button" href='{{ url("auth/registrasi") }}' class="btn btn-primary">REGISTRASI</a>
                     </div>
 
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Login</button>
-                    <a href="{{ url('auth/registrasi') }}" class="btn btn-primary"><i class="fas fa-user"></i> Registrasi</a>
                 </form>
             </div>
         </div>
     </div>
-</section>
+</div>
 
 @endsection

@@ -16,6 +16,7 @@ use App\Http\Controllers\fAjax;
 
 // controller pelanggan
 use App\Http\Controllers\fDashboard;
+use App\Http\Controllers\fAuth;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +55,17 @@ Route::post('/ajax/pengiriman/getongkir',  [fAjax::class, 'getongkir']);
 //  ================================= PELANGGAN ROUTE ===============================
 
 Route::any('/', [fDashboard::class, 'index']);
+Route::any('/dashboard', [fDashboard::class, 'index']);
+
+// auth
+Route::any('/auth/registrasi', [fAuth::class, 'registrasi']);
+Route::any('/auth/login', [fAuth::class, 'login']);
+Route::any('/auth/profile', [fAuth::class, 'profile']);
+Route::any('/auth/revisi/{id}', [fAuth::class, 'revisi']);
+Route::any('/auth/actlogin', [fAuth::class, 'actlogin']);
+Route::any('/auth/actregistrasi', [fAuth::class, 'actregistrasi']);
+Route::any('/auth/actrevisi', [fAuth::class, 'actrevisi']);
+Route::any('/auth/actupdateprofile', [fAuth::class, 'actupdateprofile']);
 
 //  ================================= ADMIN ROUTE ===============================
 
@@ -95,10 +107,13 @@ Route::any('/admin/informasi/acthapus/{id}', [aInformasi::class, 'acthapus']);
 
 // Anggota
 Route::any('/admin/anggota/list', [aAnggota::class, 'list']);
+Route::any('/admin/anggota/verifikasi', [aAnggota::class, 'verifikasi']);
+Route::any('/admin/anggota/verifikasi/detail/{id}', [aAnggota::class, 'verifikasidetail']);
 Route::any('/admin/anggota/informasi', [aAnggota::class, 'informasi']);
 Route::any('/admin/anggota/tambah', [aAnggota::class, 'tambah']);
 Route::any('/admin/anggota/edit/{id}', [aAnggota::class, 'edit']);
 Route::any('/admin/anggota/detail/{id}', [aAnggota::class, 'detail']);
 Route::any('/admin/anggota/acttambah', [aAnggota::class, 'acttambah']);
 Route::any('/admin/anggota/actedit', [aAnggota::class, 'actedit']);
+Route::any('/admin/anggota/actverifikasi', [aAnggota::class, 'actverifikasi']);
 Route::any('/admin/anggota/acthapus/{id}', [aAnggota::class, 'acthapus']);

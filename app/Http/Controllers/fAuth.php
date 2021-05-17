@@ -26,7 +26,7 @@ class fAuth extends Controller
     {
 		// page data
 		$this->pesan = "";
-    	$this->baseTable = "tbl_pelanggan";
+    	$this->baseTable = "tbl_anggota";
     	$this->prefix = "auth";
     	$this->pagename = "Auth";
 
@@ -44,11 +44,31 @@ class fAuth extends Controller
         return view("front/$this->prefix/registrasi");
     }
 
+    public function revisi($id)
+    {
+		// Judul Halaman
+		$data['prefix'] = $this->prefix;
+		$data['pagename'] = 'Profile Pelanggan';
+		$data['aksi'] = "actupdateprofile";
+
+		// paramerter error
+		$data['pesaninfo'] = "";
+		$data['iserror'] = false;
+
+        $data['rows'] = DB::table('tbl_anggota')
+                        ->where('kodeanggota', '=', $id)
+                        ->first();
+
+        $data['password_dec'] = Crypt::decryptString($data['rows']->password);
+
+        return view("front/$this->prefix/revisi", $data);
+    }
+
     public function profile()
     {
     	// $this->middleware('ceklogin');
 
-    	$id = session('kodepelanggan');
+    	$id = session('kodeanggota');
 
 		// Judul Halaman
 		$data['prefix'] = $this->prefix;
@@ -59,11 +79,11 @@ class fAuth extends Controller
 		$data['pesaninfo'] = "";
 		$data['iserror'] = false;
 
-        $data['rows'] = DB::table('tbl_pelanggan')
-                        ->where('kodepelanggan', '=', $id)
+        $data['rows'] = DB::table($this->baseTable)
+                        ->where('kodeanggota', '=', $id)
                         ->first();
 
-        $data['passwordpelanggan'] = Crypt::decryptString($data['rows']->passwordpelanggan);
+        $data['password_dec'] = Crypt::decryptString($data['rows']->password);
 
         return view("front/$this->prefix/profile", $data);
     }
@@ -77,31 +97,31 @@ class fAuth extends Controller
 
 		try
 		{
-            $userpelanggan = Cfilter::FilterString($request->input('userpelanggan'));
+            $useranggota = Cfilter::FilterString($request->input('useranggota'));
 
             // cek apakah ada username yang sama
-			$cekusername = Csql::cariData2("userpelanggan", "userpelanggan", $userpelanggan, $this->baseTable);
+			$cekusername = Csql::cariData2("useranggota", "useranggota", $useranggota, $this->baseTable);
 			if($cekusername != "")
 			{
-				$this->pesaninfo = Cview::pesanGagal("Kesalahan Tambah Data : <b>username : $userpelanggan</b> sudah ada.");
+				$this->pesaninfo = Cview::pesanGagal("Kesalahan Tambah Data : <b>username : $useranggota</b> sudah ada.");
 				return redirect()->action([fAuth::class, 'registrasi'])->with('pesaninfo', $this->pesaninfo)->with('erroract', true)->withInput();
             }
 
-            $kodepelanggan = Csql::generateKode2("kodepelanggan", "PELANGGAN", $this->baseTable);
-            $gambarpelanggan = Cupload::UploadGambar('gambarpelanggan', '', $request);
+            $kodeanggota = Csql::generateKode2("kodeanggota", date("Ymd")."-ANGGOTA", $this->baseTable);
+            $gambaranggota = Cupload::UploadGambar('gambaranggota', '', $request);
 
 			DB::table($this->baseTable)->insert([[
-                'kodepelanggan' => Cfilter::FilterString($kodepelanggan),
-                'userpelanggan' => Cfilter::FilterString($request->input('userpelanggan')),
-                'passwordpelanggan' => Crypt::encryptString($request->input('passwordpelanggan')),
-                'namapelanggan' => Cfilter::FilterString($request->input('namapelanggan')),
-                'emailpelanggan' => Cfilter::FilterString($request->input('emailpelanggan')),
-                'alamatpelanggan' => Cfilter::FilterString($request->input('alamatpelanggan')),
-                'noteleponpelanggan' => Cfilter::FilterString($request->input('noteleponpelanggan')),
-                'alamatpelanggan' => Cfilter::FilterString($request->input('alamatpelanggan')),
-                'gambarpelanggan' => Cfilter::FilterString($gambarpelanggan),
-                'dateaddpelanggan' => Cfilter::FilterString(date("Y-m-d H:i")),
-                'dateupdpelanggan' => Cfilter::FilterString(date("Y-m-d H:i")),
+                'kodeanggota' => Cfilter::FilterString($kodeanggota),
+                'useranggota' => Cfilter::FilterString($request->input('useranggota')),
+                'password' => Crypt::encryptString($request->input('password')),
+                'namaanggota' => Cfilter::FilterString($request->input('namaanggota')),
+                'noteleponanggota' => Cfilter::FilterString($request->input('noteleponanggota')),
+                'alamatanggota' => Cfilter::FilterString($request->input('alamatanggota')),
+                'jk' => Cfilter::FilterString($request->input('jk')),
+                'statusanggota' => Cfilter::FilterInt(0),
+                'gambaranggota' => Cfilter::FilterString($gambaranggota),
+                'dateaddanggota' => Cfilter::FilterString(date("Y-m-d H:i")),
+                'dateupdanggota' => Cfilter::FilterString(date("Y-m-d H:i")),
 			]]);
 
             DB::commit();
@@ -113,8 +133,8 @@ class fAuth extends Controller
 		}
 
 		// jika berhasil
-		$this->pesaninfo = Cview::pesanSukses("Berhasil Tambah Data : <b>".$request->input('namapelanggan')."</b>, silahkan melakukan login ulang kedalam sistem.");
-		return redirect()->action([fInfo::class, 'info'])->with('pesaninfo', $this->pesaninfo);
+		$this->pesaninfo = Cview::pesanSukses("Berhasil Tambah Data : <b>".$request->input('namaanggota')."</b>, silahkan menunggu proses verifikasi dari pihak staff kami.");
+		return redirect()->action([fAuth::class, 'registrasi'])->with('pesaninfo', $this->pesaninfo);
     }
 
     public function actupdateprofile(Request $request)
@@ -125,43 +145,44 @@ class fAuth extends Controller
 
 		try {
 
-            $id = session('kodepelanggan');
-            $userpelanggan = Cfilter::FilterString($request->input('userpelanggan'));
-			$userpelanggan_old = Cfilter::FilterString($request->input('userpelanggan_old'));
+            $kodeanggota = session('kodeanggota');
+            $useranggota = Cfilter::FilterString($request->input('useranggota'));
+			$useranggota_old = Cfilter::FilterString($request->input('useranggota_old'));
 
-			$gambarpelanggan_old = Csql::cariData2('gambarpelanggan', 'kodepelanggan', $id, $this->baseTable);
-			$gambarpelanggan = Cupload::UploadGambar('gambarpelanggan', $gambarpelanggan_old, $request);
+			$gambaranggota_old = Csql::cariData2('gambaranggota', 'kodeanggota', $kodeanggota, $this->baseTable);
+			$gambaranggota = Cupload::UploadGambar('gambaranggota', $gambaranggota_old, $request);
 
-			if($userpelanggan != $userpelanggan_old)
+			if($useranggota_old != $useranggota)
 			{
 				// cek apakah ada username yang sama
-				$cekusername = Csql::cariData2("userpelanggan", "userpelanggan", $userpelanggan, "tbl_pelanggan");
+				$cekusername = Csql::cariData2("useranggota_old", "useranggota", $useranggota_old, $this->baseTable);
 				if($cekusername != "")
 				{
 					$this->pesaninfo = Cview::pesanGagal("Kesalahan Edit Data : <b>username</b> sudah ada.");
-					return redirect()->action([fAuth::class, 'profile'], ['id' => $id])->with('pesaninfo', $this->pesaninfo)->with('erroract', true)->withInput();
+					return redirect()->action([fAuth::class, 'revisi'], ['id' => $kodeanggota])->with('pesaninfo', $this->pesaninfo)->with('erroract', true)->withInput();
 				}
 			}
 
 			// update user
-			DB::table("tbl_pelanggan")
-	            ->where('kodepelanggan', "=", $id)
+			DB::table($this->baseTable)
+	            ->where('kodeanggota', "=", $kodeanggota)
 	            ->update
 	            ([
-		            'userpelanggan' => Cfilter::FilterString($request->input('userpelanggan')),
-	                'passwordpelanggan' => Crypt::encryptString($request->input('passwordpelanggan')),
-	                'namapelanggan' => Cfilter::FilterString($request->input('namapelanggan')),
-	                'emailpelanggan' => Cfilter::FilterString($request->input('emailpelanggan')),
-	                'alamatpelanggan' => Cfilter::FilterString($request->input('alamatpelanggan')),
-	                'noteleponpelanggan' => Cfilter::FilterString($request->input('noteleponpelanggan')),
-	                'alamatpelanggan' => Cfilter::FilterString($request->input('alamatpelanggan')),
-	                'gambarpelanggan' => Cfilter::FilterString($gambarpelanggan),
-                    'dateupdpelanggan' => Cfilter::FilterString(date("Y-m-d H:i")),
+		            'useranggota' => Cfilter::FilterString($request->input('useranggota')),
+	                'password' => Crypt::encryptString($request->input('password')),
+	                'namaanggota' => Cfilter::FilterString($request->input('namaanggota')),
+	                'noteleponanggota' => Cfilter::FilterString($request->input('noteleponanggota')),
+	                'alamatanggota' => Cfilter::FilterString($request->input('alamatanggota')),
+	                'jk' => Cfilter::FilterString($request->input('jk')),
+	                'statusanggota' => Cfilter::FilterInt(0),
+	                'gambaranggota' => Cfilter::FilterString($gambaranggota),
 	            ]);
 
+            DB::commit();
+
 	        session([
-				'userpelanggan' => Cfilter::FilterString($request->input('userpelanggan')),
-				'namapelanggan' => Cfilter::FilterString($request->input('namapelanggan'))
+				'useranggota' => Cfilter::FilterString($request->input('useranggota')),
+				'namaanggota' => Cfilter::FilterString($request->input('namaanggota'))
 			]);
 
             DB::commit();
@@ -173,8 +194,63 @@ class fAuth extends Controller
 		}
 
 		// jika berhasil
-		$this->pesaninfo = Cview::pesanSukses("Berhasil Update Profile Data : <b>".$request->input('namauser')."</b>");
+		$this->pesaninfo = Cview::pesanSukses("Berhasil Update Profile Data : <b>".$request->input('namaanggota')."</b>");
 		return redirect()->action([fAuth::class, 'profile'])->with('pesaninfo', $this->pesaninfo);
+
+    }
+
+    public function actrevisi(Request $request)
+    {
+        // Update Data
+
+		DB::beginTransaction();
+
+		try {
+
+            $kodeanggota = Cfilter::FilterString($request->input('kodeanggota'));
+            $useranggota = Cfilter::FilterString($request->input('useranggota'));
+			$useranggota_old = Cfilter::FilterString($request->input('useranggota_old'));
+
+			$gambaranggota_old = Csql::cariData2('gambaranggota', 'kodeanggota', $kodeanggota, $this->baseTable);
+			$gambaranggota = Cupload::UploadGambar('gambaranggota', $gambaranggota_old, $request);
+
+			if($useranggota_old != $useranggota)
+			{
+				// cek apakah ada username yang sama
+				$cekusername = Csql::cariData2("useranggota_old", "useranggota", $useranggota_old, $this->baseTable);
+				if($cekusername != "")
+				{
+					$this->pesaninfo = Cview::pesanGagal("Kesalahan Edit Data : <b>username</b> sudah ada.");
+					return redirect()->action([fAuth::class, 'revisi'], ['id' => $kodeanggota])->with('pesaninfo', $this->pesaninfo)->with('erroract', true)->withInput();
+				}
+			}
+
+			// update user
+			DB::table($this->baseTable)
+	            ->where('kodeanggota', "=", $kodeanggota)
+	            ->update
+	            ([
+		            'useranggota' => Cfilter::FilterString($request->input('useranggota')),
+	                'password' => Crypt::encryptString($request->input('password')),
+	                'namaanggota' => Cfilter::FilterString($request->input('namaanggota')),
+	                'noteleponanggota' => Cfilter::FilterString($request->input('noteleponanggota')),
+	                'alamatanggota' => Cfilter::FilterString($request->input('alamatanggota')),
+	                'jk' => Cfilter::FilterString($request->input('jk')),
+	                'statusanggota' => Cfilter::FilterInt(0),
+	                'gambaranggota' => Cfilter::FilterString($gambaranggota),
+	            ]);
+
+            DB::commit();
+
+		} catch (\Exception $ex) {
+		    DB::rollback();
+			$this->pesaninfo = Cview::pesanGagal("Kesalahan Update Revisi Data : <b>".$ex->getMessage()."</b>");
+			return redirect()->action([fAuth::class, 'revisi'], ['id' => $kodeanggota])->with('pesaninfo', $this->pesaninfo)->with('erroract', true)->withInput();
+		}
+
+		// jika berhasil
+		$this->pesaninfo = Cview::pesanSukses("Berhasil Update Profile Data : <b>".$request->input('namaanggota')."</b>");
+		return redirect()->action([fAuth::class, 'revisi'], ['id' => $kodeanggota])->with('pesaninfo', $this->pesaninfo);
 
     }
 
@@ -186,39 +262,50 @@ class fAuth extends Controller
 
 	public function actlogin(Request $request)
     {
-		$userpelanggan = Cfilter::FilterString($request->input('userpelanggan'));
-		$passwordpelanggan = Cfilter::FilterString($request->input('passwordpelanggan'));
+		$useranggota = Cfilter::FilterString($request->input('useranggota'));
+		$password = Cfilter::FilterString($request->input('password'));
 
-		$sql = "SELECT * FROM tbl_pelanggan
-				WHERE ( tbl_pelanggan.userpelanggan = '$userpelanggan')
+		$sql = "SELECT * FROM tbl_anggota
+				WHERE ( tbl_anggota.useranggota = '$useranggota')
 				";
 
 		$rows = DB::select(DB::raw($sql));
 
-		if(empty($rows[0]->userpelanggan))
+		if(empty($rows[0]->useranggota))
 		{
-			$this->pesaninfo = Cview::pesanGagal("username tidak ditemukan.");
+			$this->pesaninfo = Cview::pesanGagal("useranggota tidak ditemukan.");
 			return redirect()->action([fAuth::class, 'login'])->with('pesaninfo', $this->pesaninfo)->with('erroract', true);
 		}
 
 		else
 		{
-			$password_dec = Crypt::decryptString($rows[0]->passwordpelanggan);
-			if($passwordpelanggan != $password_dec)
+			$password_dec = Crypt::decryptString($rows[0]->password);
+			if($password != $password_dec)
 			{
-				$this->pesaninfo = "<p style='font-size: 11pt; color: #ffd7d7;'>useradmin atau [password] anda salah.</p>";
+				$this->pesaninfo = Cview::pesanGagal("useradmin atau [password] anda salah.");
 				return redirect()->action([fAuth::class, 'login'])->with('pesaninfo', $this->pesaninfo);
 			}
 
+			if($rows[0]->statusanggota == 0)
+			{
+				$this->pesaninfo = Cview::pesanGagal("akun anda masih dalam tahap verifikasi oleh staff kami.");
+				return redirect()->action([fAuth::class, 'login'])->with('pesaninfo', $this->pesaninfo);
+			}
+
+			if($rows[0]->statusanggota == 2)
+			{
+				return redirect()->action([fAuth::class, 'revisi'], ['id' => $rows[0]->kodeanggota]);
+			}
+
 			session([
-				'kodepelanggan' => $rows[0]->kodepelanggan,
-				'userpelanggan' => $rows[0]->userpelanggan,
-				'namapelanggan' => $rows[0]->namapelanggan,
+				'kodeanggota' => $rows[0]->kodeanggota,
+				'useranggota' => $rows[0]->useranggota,
+				'namaanggota' => $rows[0]->namaanggota,
 				'waktu' => date('Y-m-d H:i'),
 			]);
 
 			$this->pesaninfo = Cview::pesanSukses("Anda berhasil login, kedalam sistem.");
-			return redirect()->action([fInfo::class, 'info'])->with('pesaninfo', $this->pesaninfo);
+			return redirect()->action([fDashboard::class, 'index'])->with('pesaninfo', $this->pesaninfo);
 		}
     }
 

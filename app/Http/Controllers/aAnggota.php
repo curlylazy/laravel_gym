@@ -52,6 +52,29 @@ class aAnggota extends Controller
         return view("admin/$this->prefix/list", $data);
     }
 
+    public function verifikasi(Request $request)
+    {
+		// breadcrumb
+		$breadcrumb = array();
+		$breadcrumb []= "<li class='breadcrumb-item'><a href='".url("admin/dashboard")."'>Dashboard</a></li>";
+		$breadcrumb []= "<li class='breadcrumb-item active'>$this->pagename</li>";
+		$breadcrumb []= "<li class='breadcrumb-item active'>List</li>";
+		$data['breadcrumb'] = join($breadcrumb, "");
+
+		// Judul Halaman
+		$data['prefix'] = $this->prefix;
+		$data['pagename'] = $this->pagename;
+
+		// passing function ke view
+		$data['rows'] = DB::table($this->baseTable)
+                        ->select('*')
+                        ->whereIn('statusanggota', [0,2])
+						->orderBy('kodeanggota', 'desc')
+						->get();
+
+        return view("admin/$this->prefix/verifikasi", $data);
+    }
+
     public function informasi(Request $request)
     {
 		// breadcrumb
@@ -149,6 +172,33 @@ class aAnggota extends Controller
         $data['password'] = Crypt::decryptString($data['rows']->password);
 
         return view("admin/$this->prefix/detail", $data);
+    }
+
+    public function verifikasidetail($id)
+    {
+		// breadcrumb
+		$breadcrumb = array();
+		$breadcrumb []= "<li class='breadcrumb-item'><a href='".url("admin/dashboard")."'> Dashboard</a></li>";
+		$breadcrumb []= "<li class='breadcrumb-item'><a href='".url("admin/$this->prefix/list")."'>$this->pagename</a></li>";
+		$breadcrumb []= "<li class='breadcrumb-item'>Edit</li>";
+		$breadcrumb []= "<li class='breadcrumb-item'><b>$id</b></li>";
+		$data['breadcrumb'] = join($breadcrumb, "");
+
+		// Judul Halaman
+		$data['prefix'] = $this->prefix;
+		$data['pagename'] = $this->pagename;
+
+		// paramerter error
+		$data['pesaninfo'] = "";
+		$data['iserror'] = false;
+
+        $data['rows'] = DB::table($this->baseTable)
+                        ->where('kodeanggota', '=', $id)
+                        ->first();
+
+        $data['password'] = Crypt::decryptString($data['rows']->password);
+
+        return view("admin/$this->prefix/verifikasidetail", $data);
     }
 
     public function acttambah(Request $request)
@@ -253,6 +303,39 @@ class aAnggota extends Controller
 		// jika berhasil
 		$this->pesaninfo = Cview::pesanSukses("Berhasil Update Data : <b>".$request->input('kodeanggota')."</b>");
 		return redirect()->action([aAnggota::class, 'edit'], ['id' => $id])->with('pesaninfo', $this->pesaninfo);
+
+    }
+
+    public function actverifikasi(Request $request)
+    {
+        // Update Data
+
+		DB::beginTransaction();
+
+		try {
+
+			$kodeanggota = Cfilter::FilterString($request->input('kodeanggota'));
+
+			// update user
+			DB::table($this->baseTable)
+	            ->where('kodeanggota', "=", $kodeanggota)
+	            ->update
+	            ([
+		            'statusanggota' => Cfilter::FilterString($request->input('statusanggota')),
+		            'alasanditolak' => Cfilter::FilterString($request->input('alasanditolak')),
+                	'dateupdanggota' => Cfilter::FilterString(date("Y-m-d H:i")),
+	            ]);
+
+		    DB::commit();
+		} catch (\Exception $ex) {
+		    DB::rollback();
+			$this->pesaninfo = Cview::pesanGagal("Kesalahan Update Data : <b>".$ex->getMessage()."</b>");
+			return redirect()->action([aAnggota::class, 'verifikasidetail'], ['id' => $kodeanggota])->with('pesaninfo', $this->pesaninfo)->with('erroract', true)->withInput();
+		}
+
+		// jika berhasil
+		$this->pesaninfo = Cview::pesanSukses("Berhasil Update Data : <b>".$request->input('kodeanggota')."</b>");
+		return redirect()->action([aAnggota::class, 'verifikasidetail'], ['id' => $kodeanggota])->with('pesaninfo', $this->pesaninfo);
 
     }
 

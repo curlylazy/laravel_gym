@@ -1,146 +1,212 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
+<!DOCTYPE HTML>
+<html>
+    <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>E-Commerce Pasar Ikan Pengambengan</title>
-    <meta name="description" content="">
+    <title>Tiger GYM</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="all,follow">
-    <!-- Bootstrap CSS-->
-    <link rel="stylesheet" href="{{ asset('cssfront/vendor/bootstrap/css/bootstrap.min.css') }}">
-    <!-- Lightbox-->
-    <link rel="stylesheet" href="{{ asset('cssfront/vendor/lightbox2/css/lightbox.min.css') }}">
-    <!-- Range slider-->
-    <link rel="stylesheet" href="{{ asset('cssfront/vendor/nouislider/nouislider.min.css') }}">
-    <!-- Bootstrap select-->
-    <link rel="stylesheet" href="{{ asset('cssfront/vendor/bootstrap-select/css/bootstrap-select.min.css') }}">
-    <!-- Owl Carousel-->
-    <link rel="stylesheet" href="{{ asset('cssfront/vendor/owl.carousel2/assets/owl.carousel.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('cssfront/vendor/owl.carousel2/assets/owl.theme.default.css') }}">
-    <!-- Google fonts-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;700&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Martel+Sans:wght@300;400;800&amp;display=swap">
-    <!-- theme stylesheet-->
-    <link rel="stylesheet" href="{{ asset('cssfront/css/style.default.css') }}" id="theme-stylesheet">
-    <!-- Custom stylesheet - for your changes-->
-    <link rel="stylesheet" href="{{ asset('cssfront/css/custom.css') }}">
-    <!-- Favicon-->
-    <link rel="shortcut icon" href="{{ asset('cssfront/img/favicon.png') }}">
+    <meta name="description" content="Free HTML5 Website Template by freehtml5.co" />
+    <meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
+    <meta name="author" content="freehtml5.co" />
+
+    <!-- 
+    //////////////////////////////////////////////////////
+
+    FREE HTML5 TEMPLATE 
+    DESIGNED & DEVELOPED by FreeHTML5.co
+        
+    Website:        http://freehtml5.co/
+    Email:          info@freehtml5.co
+    Twitter:        http://twitter.com/fh5co
+    Facebook:       https://www.facebook.com/fh5co
+
+    //////////////////////////////////////////////////////
+     -->
+
+    <!-- Facebook and Twitter integration -->
+    <meta property="og:title" content=""/>
+    <meta property="og:image" content=""/>
+    <meta property="og:url" content=""/>
+    <meta property="og:site_name" content=""/>
+    <meta property="og:description" content=""/>
+    <meta name="twitter:title" content="" />
+    <meta name="twitter:image" content="" />
+    <meta name="twitter:url" content="" />
+    <meta name="twitter:card" content="" />
+
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,700,800" rel="stylesheet">
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="{{ asset('cssfront/css/animate.css') }}">
+    <!-- Icomoon Icon Fonts-->
+    <link rel="stylesheet" href="{{ asset('cssfront/css/icomoon.css') }}">
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" href="{{ asset('cssfront/css/bootstrap.css') }}">
+
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="{{ asset('cssfront/css/magnific-popup.css') }}">
+
+    <!-- Owl Carousel  -->
+    <link rel="stylesheet" href="{{ asset('cssfront/css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('cssfront/css/owl.theme.default.min.css') }}">
+
+    <!-- Theme style  -->
+    <link rel="stylesheet" href="{{ asset('cssfront/css/style.css') }}">
 
     @stack('stylecss')
 
-    <style>
-        .readonly
-        {
-            pointer-events: none;
-        }
-    </style>
-</head>
+    <!-- Modernizr JS -->
+    <script src="{{ asset('cssfront/js/modernizr-2.6.2.min.js') }}"></script>
+    <!-- FOR IE9 below -->
+    <!--[if lt IE 9]>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
 
-<body>
-
-    <div class="page-holder">
-        <header class="header bg-white">
-            <div class="container px-0 px-lg-3">
-                <nav class="navbar navbar-expand-lg navbar-light py-3 px-lg-0"><a class="navbar-brand" href="index.html"><span class="font-weight-bold text-uppercase text-dark">Pengambengan Market</span></a>
-                    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item"><a class="nav-link active" href="{{ url('/') }}">Home</a></li>
-                            <li class="nav-item"><a class="nav-link active" href="{{ url('/nelayan') }}">Nelayan</a></li>
-                            <li class="nav-item"><a class="nav-link active" href="{{ url('/item') }}">Item</a></li>
-                            @if(session('userpelanggan') == '')
-                                <li class="nav-item"><a class="nav-link active" href="{{ url('/auth/registrasi') }}">Registrasi</a></li>
-                            @else
-                                <li class="nav-item"><a class="nav-link active" href="{{ url('/auth/profile') }}">Profile</a></li>
-                                <li class="nav-item"><a class="nav-link active" href="{{ url('/transaksi') }}">Transaksi</a></li>
-                            @endif
-                        </ul>
-                        <ul class="navbar-nav ml-auto">
-                            @if(session('userpelanggan') == '')
-                                <li class="nav-item"><a class="nav-link" href="{{ url('/auth/login') }}"> <i class="fas fa-user-alt mr-1 text-gray"></i>Login</a></li>
-                                <li class="nav-item"><a class="nav-link" href="{{ url('/auth/registrasi') }}"> <i class="fas fa-user-plus mr-1 text-gray"></i>Registrasi</a></li>
-                            @else
-                                <li class="nav-item"><a class="nav-link" href="{{ url('/cart') }}"> <i class="fas fa-dolly-flatbed mr-1 text-gray"></i>Cart ({{ App\Lib\Csql::getTotalItemInCart() }})</a></li>
-                                <li class="nav-item"><a class="nav-link" href="{{ url('/auth/actlogout') }}"> <i class="fas fa-sign-out mr-1 text-gray"></i>Log Out</a></li>
-                            @endif
-                        </ul>
-                    </div>
-                </nav>
-            </div>
-        </header>
-    </div>
-
-    @yield('content')
-
-
-    <footer class="bg-dark text-white mt-3">
-        <div class="container py-4">
-            <div class="border-top pt-4" style="border-color: #1d1d1d !important">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <p class="small text-muted mb-0">&copy; {{ date('Y') }} Sistem oleh Rusli.</p>
-                    </div>
-                    <div class="col-lg-6 text-lg-right">
-                        <p class="small text-muted mb-0">Template designed by <a class="text-white reset-anchor" href="https://bootstraptemple.com/p/bootstrap-ecommerce">Bootstrap Temple</a></p>
+    </head>
+    <body>
+        
+    <div class="fh5co-loader"></div>
+    
+    <div id="page">
+        <nav class="fh5co-nav" role="navigation">
+            <div class="top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 text-right">
+                            <p class="num">Call: +01 123 456 7890</p>
+                            <ul class="fh5co-social">
+                                <li><a href="#"><i class="icon-twitter"></i></a></li>
+                                <li><a href="#"><i class="icon-dribbble"></i></a></li>
+                                <li><a href="#"><i class="icon-github"></i></a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="top-menu">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <div id="fh5co-logo"><a href="index.html">TIGER GYM<span>.</span></a></div>
+                        </div>
+                        <div class="col-xs-10 text-right menu-1">
+                            <ul>
+                                <li><a href='{{ url("dashboard") }}'>Home</a></li>
+                                <li><a href='{{ url("alatgym") }}'>Alat Gym</a></li>
+
+                                @if(empty(session('kodeanggota')))
+                                    <li><a href='{{ url("auth/registrasi") }}'>Registrasi</a></li>
+                                    <li><a href='{{ url("auth/login") }}'>Login</a></li>
+                                @else
+                                    <li><a href='{{ url("auth/profile") }}'>Profile</a></li>
+                                    <li><a href='{{ url("pembayaran/list") }}'>Pembayaran</a></li>
+                                    <li><a href='{{ url("kartuanggota") }}'>Kartu Anggota</a></li>
+                                    <li><a href='{{ url("historykunjungan") }}'>History</a></li>
+                                    <li><a href='{{ url("auth/logout") }}'>Log Out</a></li>
+                                @endif
+
+                            </ul>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </nav>
+
+        @yield('content')
+
+    <!-- <footer id="fh5co-footer" class="fh5co-bg" style="background-image: url(images/img_bg_1.jpg);" role="contentinfo">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row row-pb-md">
+                <div class="col-md-4 fh5co-widget">
+                    <h3>A Little About Stamina.</h3>
+                    <p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit. Eos cumque dicta adipisci architecto culpa amet.</p>
+                    <p><a class="btn btn-primary" href="#">Become A Member</a></p>
+                </div>
+                <div class="col-md-8">
+                    <h3>Classes</h3>
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <ul class="fh5co-footer-links">
+                            <li><a href="#">Cardio</a></li>
+                            <li><a href="#">Body Building</a></li>
+                            <li><a href="#">Yoga</a></li>
+                            <li><a href="#">Boxing</a></li>
+                            <li><a href="#">Running</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <ul class="fh5co-footer-links">
+                            <li><a href="#">Boxing</a></li>
+                            <li><a href="#">Martial Arts</a></li>
+                            <li><a href="#">Karate</a></li>
+                            <li><a href="#">Kungfu</a></li>
+                            <li><a href="#">Basketball</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <ul class="fh5co-footer-links">
+                            <li><a href="#">Badminton</a></li>
+                            <li><a href="#">Body Building</a></li>
+                            <li><a href="#">Teams</a></li>
+                            <li><a href="#">Advertise</a></li>
+                            <li><a href="#">API</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row copyright">
+                <div class="col-md-12 text-center">
+                    <p>
+                        <small class="block">&copy; 2016 Free HTML5. All Rights Reserved.</small> 
+                        <small class="block">Designed by <a href="http://freehtml5.co/" target="_blank">FreeHTML5.co</a> Demo Images: <a href="http://unsplash.co/" target="_blank">Unsplash</a></small>
+                    </p>
+                    <p>
+                        <ul class="fh5co-social-icons">
+                            <li><a href="#"><i class="icon-twitter"></i></a></li>
+                            <li><a href="#"><i class="icon-facebook"></i></a></li>
+                            <li><a href="#"><i class="icon-linkedin"></i></a></li>
+                            <li><a href="#"><i class="icon-dribbble"></i></a></li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+
         </div>
-    </footer>
+    </footer> -->
+    </div>
 
-    <!-- javascript -->
-    <script src="{{ asset('cssfront/vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('cssfront/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('cssfront/vendor/lightbox2/js/lightbox.min.js') }}"></script>
-    <script src="{{ asset('cssfront/vendor/nouislider/nouislider.min.js') }}"></script>
-    <script src="{{ asset('cssfront/vendor/bootstrap-select/js/bootstrap-select.min.js') }}"></script>
-    <script src="{{ asset('cssfront/vendor/owl.carousel2/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('cssfront/vendor/owl.carousel2.thumbs/owl.carousel2.thumbs.min.js') }}"></script>
-    <script src="{{ asset('cssfront/js/front.js') }}"></script>
+    <div class="gototop js-top">
+        <a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+    </div>
 
-    <!-- Date Picker -->
-    <link href="{{ asset('cssadmin/plugins/datepicker/jquery.datetimepicker.css') }}" rel="stylesheet">
-    <script src="{{ asset('cssadmin/plugins/datepicker/jquery.datetimepicker.full.js') }}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <!-- jQuery -->
+    <script src="{{ asset('cssfront/js/jquery.min.js') }}"></script>
+    <!-- jQuery Easing -->
+    <script src="{{ asset('cssfront/js/jquery.easing.1.3.js') }}"></script>
+    <!-- Bootstrap -->
+    <script src="{{ asset('cssfront/js/bootstrap.min.js') }}"></script>
+    <!-- Waypoints -->
+    <script src="{{ asset('cssfront/js/jquery.waypoints.min.js') }}"></script>
+    <!-- Stellar Parallax -->
+    <script src="{{ asset('cssfront/js/jquery.stellar.min.js') }}"></script>
+    <!-- Carousel -->
+    <script src="{{ asset('cssfront/js/owl.carousel.min.js') }}"></script>
+    <!-- countTo -->
+    <script src="{{ asset('cssfront/js/jquery.countTo.js') }}"></script>
+    <!-- Magnific Popup -->
+    <script src="{{ asset('cssfront/js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('cssfront/js/magnific-popup-options.js') }}"></script>
+    <!-- Main -->
+    <script src="{{ asset('cssfront/js/main.js') }}"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
-    <script>
-        // ------------------------------------------------------- //
-        //   Inject SVG Sprite - 
-        //   see more here 
-        //   https://css-tricks.com/ajaxing-svg-sprite/
-        // ------------------------------------------------------ //
-        function injectSvgSprite(path) {
-        
-            var ajax = new XMLHttpRequest();
-            ajax.open("GET", path, true);
-            ajax.send();
-            ajax.onload = function(e) {
-                var div = document.createElement("div");
-                div.className = 'd-none';
-                div.innerHTML = ajax.responseText;
-                document.body.insertBefore(div, document.body.childNodes[0]);
-            }
-        }
-        // this is set to BootstrapTemple website as you cannot 
-        // inject local SVG sprite (using only 'icons/orion-svg-sprite.svg' path)
-        // while using file:// protocol
-        // pls don't forget to change to your domain :)
-        injectSvgSprite('https://bootstraptemple.com/files/icons/orion-svg-sprite.svg'); 
-        
-      </script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     @stack('scripts')
 
-</body>
-
+    </body>
 </html>
+

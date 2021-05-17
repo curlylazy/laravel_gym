@@ -23,6 +23,7 @@
     <div class="login-box">
         
         <div class="login-logo">
+            <img src="{{ asset('img/logo.png') }}" width="250" /><br />
             <small>Tiger GYM</small><br />
             <a href="#" style="color: white">Sistem Keanggotan</a>
         </div>

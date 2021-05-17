@@ -4,46 +4,60 @@
 
 <script type="text/javascript">
 
+function isEmail(email) {
+    var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    return regex.test(email);
+}
+
 $(document).ready(function() {
 
-    $("#userpelanggan").val("{{ $rows->userpelanggan }}");
-    $("#userpelanggan_old").val("{{ $rows->userpelanggan }}");
-    $("#namapelanggan").val("{{ $rows->namapelanggan }}");
-    $("#passwordpelanggan").val("{{ $passwordpelanggan }}");
-    $("#emailpelanggan").val("{{ $rows->emailpelanggan }}");
-    $("#alamatpelanggan").val("{{ $rows->alamatpelanggan }}");
-    $("#noteleponpelanggan").val("{{ $rows->noteleponpelanggan }}");
+    $("#gambarview").attr("src", "{{ url('gambar/noimage.jpg') }}");
 
-    $("#gambarview").attr("src", '{{ url("gambar/$rows->gambarpelanggan") }}');
+    $("#kodeanggota").val("{{ $rows->kodeanggota }}");
+    $("#useranggota_old").val("{{ $rows->useranggota }}");
+    $("#useranggota").val("{{ $rows->useranggota }}");
+    $("#namaanggota").val("{{ $rows->namaanggota }}");
+    $("#password").val("{{ $password_dec }}");
+    $("#noteleponanggota").val("{{ $rows->noteleponanggota }}");
+    $("#alamatanggota").val("{{ $rows->alamatanggota }}");
+
+    @if($rows->gambaranggota != "")
+        $("#gambarview").attr("src", "{{ url("gambar/$rows->gambaranggota") }}");
+    @else
+        $("#gambarview").attr("src", "{{ url('gambar/noimage.jpg') }}");
+    @endif
+
+    @if($rows->jk == "L")
+        $("#jk_lakilaki").attr('checked', true);
+    @else
+        $("#jk_wanita").attr('checked', true);
+    @endif
 
     @if(session('erroract'))
-        $("#userpelanggan").val("{{ old('userpelanggan') }}");
-        $("#userpelanggan_old").val("{{ old('userpelanggan') }}");
-        $("#namapelanggan").val("{{ old('namapelanggan') }}");
-        $("#passwordpelanggan").val("{{ old('passwordpelanggan') }}");
-        $("#emailpelanggan").val("{{ old('emailpelanggan') }}");
-        $("#alamatpelanggan").val("{{ old('alamatpelanggan') }}");
-        $("#noteleponpelanggan").val("{{ old('noteleponpelanggan') }}");
+        $("#useranggota").val("{{ old('useranggota') }}");
+        $("#namaanggota").val("{{ old('namaanggota') }}");
+        $("#password").val("{{ old('password') }}");
+        $("#noteleponanggota").val("{{ old('noteleponanggota') }}");
+        $("#alamatanggota").val("{{ old('alamatanggota') }}");
     @endif
 
     $("#simpan").click(function() {
 
-        // jika data kosong
-        var namapelanggan = $("#namapelanggan").val();
-        var userpelanggan = $("#userpelanggan").val();
-        var passwordpelanggan = $("#passwordpelanggan").val();
-
-        if(userpelanggan == "")
+        if($("#useranggota").val() == "")
         {
-            Swal.fire("PERINGATAN", "nama [userpelanggan] kosong", "warning");
+            Swal.fire("PERINGATAN", "[useranggota] kosong", "warning");
         }
-        else if(namapelanggan == "")
+        else if(!isEmail($("#useranggota").val()))
         {
-            Swal.fire("PERINGATAN", "nama [namapelanggan] kosong", "warning");
+            Swal.fire("PERINGATAN", "username harus berupa email", "warning");
         }
-        else if(passwordpelanggan == "")
+        else if($("#namaanggota").val() == "")
         {
-            Swal.fire("PERINGATAN", "nama [passwordpelanggan] kosong", "warning");
+            Swal.fire("PERINGATAN", "[namaanggota] kosong", "warning");
+        }
+        else if($("#password").val() == "")
+        {
+            Swal.fire("PERINGATAN", "[password] kosong", "warning");
         }
         else
         {
@@ -59,86 +73,101 @@ $(document).ready(function() {
 
 @section('content')
 
-<!-- Page Header -->
-<section class="py-3 bg-light" style="background:linear-gradient(0deg, rgba(0 0 0 / 30%), rgba(0 25 49)), url({{ asset('cssfront/img/banner_2.jpg') }}); background-position: center; background-size: cover;">
+<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url({{ asset('cssfront/images/img_bg_3.jpg') }}); height: 200px;" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
     <div class="container">
-        <div class="row px-4 px-lg-5 py-lg-4 align-items-center">
-            <div class="col-lg-6">
-                <h1 class="h2 text-uppercase mb-0" style="color: white">Profile</h1>
-            </div>
-            <div class="col-lg-6 text-lg-right">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb justify-content-lg-end mb-0 px-0" style="background: none;">
-                        <li class="breadcrumb-item" style="color: white"><a href="{{ url('/') }}">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Profile</li>
-                    </ol>
-                </nav>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-center" style="margin-top: 50px;">
+                <h1 style="color: white;">PROFILE</h1>
             </div>
         </div>
     </div>
-</section>
+</header>
 
-<section class="py-3 bg-light mt-2">
+<div id="fh5co-contact">
     <div class="container">
 
-        @if(!empty(session('pesaninfo')))
-            <div class="row">
-                <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="row">
+            <div class="col-lg-12 mx-auto">
+                @if(!empty(session('pesaninfo')))
                     {!! session('pesaninfo') !!}
-                </div>
+                @endif
             </div>
-        @endif
+        </div>
 
         <div class="row">
-            <div class="col-lg-12">
-                <form id="form1" enctype="multipart/form-data" method="post" action='{{ url("auth/actupdateprofile") }}'>
+            <div class="col-md-12 animate-box">
+                <form enctype="multipart/form-data" action='{{ url("auth/actupdateprofile") }}' id="form1" method="post">
 
                     @csrf
 
-                    <div class="row">
-                        <div class="col">
-                            <label for="userpelanggan">Username</label>
-                            <input type="text" class="form-control" id="userpelanggan" name="userpelanggan" placeholder="masukkan user pelanggan">
-                            <input type="hidden" class="form-control" id="userpelanggan_old" name="userpelanggan_old" placeholder="masukkan user pelanggan">
-                        </div>
-                        <div class="col">
-                            <label for="userpelanggan">Password</label>
-                            <input type="text" class="form-control" id="passwordpelanggan" name="passwordpelanggan" placeholder="masukkan password">
-                        </div>
-                    </div>
+                    <input type="text" class="form-control hidden" id="kodeanggota" name="kodeanggota">
+                    <input type="text" class="form-control hidden" id="useranggota_old" name="useranggota_old">
 
-                    <div class="form-group mt-3">
-                        <label for="userpelanggan">Nama</label>
-                        <input type="text" class="form-control" id="namapelanggan" name="namapelanggan" placeholder="masukkan nama">
-                    </div>
-
-                    <div class="row mt-3">
-                        <div class="col">
-                            <label for="userpelanggan">Email</label>
-                            <input type="text" class="form-control" id="emailpelanggan" name="emailpelanggan" placeholder="masukkan email">
+                    <div class="row form-group">
+                        <div class="col-md-6">
+                            <label for="useranggota">User Anggota</label>
+                            <input type="text" class="form-control" id="useranggota" name="useranggota" placeholder="user anggota">
                         </div>
-                        <div class="col">
-                            <label for="userpelanggan">Alamat</label>
-                            <input type="text" class="form-control" id="alamatpelanggan" name="alamatpelanggan" placeholder="masukkan alamat">
+                        <div class="col-md-6">
+                            <label for="password">Password</label>
+                            <input type="text" class="form-control" id="password" name="password" placeholder="password">
                         </div>
                     </div>
 
-                    <div class="form-group mt-3">
-                        <label for="userpelanggan">No Telepon</label>
-                        <input type="text" class="form-control" id="noteleponpelanggan" name="noteleponpelanggan" placeholder="masukkan no telepon">
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label for="namaanggota">Nama</label>
+                            <input type="text" class="form-control" id="namaanggota" name="namaanggota" placeholder="nama anda">
+                        </div>
                     </div>
 
-                    <div class="form-group mt-3">
-                        <label>Photo</label>
-                        <input type="file" id="gambarpelanggan" name="gambarpelanggan" class="form-control"><br />
-                        <img src="" id="gambarview" style="width: 200px; border-radius: 10px;">
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label for="noteleponanggota">Telepon</label>
+                            <input type="text" class="form-control" id="noteleponanggota" name="noteleponanggota" placeholder="telepon anda">
+                        </div>
                     </div>
 
-                    <button type="button" id="simpan" class="btn btn-primary"><i class="fas fa-save"></i> Submit</button>
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label for="alamatanggota">Alamat</label>
+                            <input type="text" class="form-control" id="alamatanggota" name="alamatanggota" placeholder="alamat anda">
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label for="alamatanggota">JK</label><br />
+                            <input type="radio" id="jk_lakilaki" name="jk" value="L"> Laki Laki
+                            <input type="radio" id="jk_wanita" name="jk" value="P"> Perempuan
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label for="gambaranggota">Photo Profile</label>
+                            <input type="file" class="form-control" id="gambaranggota" name="gambaranggota" placeholder="nama anda">
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <img id="gambarview" style="width: 250px;" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="button" id="simpan" class="btn btn-primary">SIMPAN</button>
+                    </div>
+
                 </form>
             </div>
         </div>
     </div>
-</section>
+</div>
+
+
+
 
 @endsection

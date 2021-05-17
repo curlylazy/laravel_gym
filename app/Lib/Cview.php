@@ -64,7 +64,7 @@ class Cview
 	public static function pesanSukses($pesan)
 	{
 		$iPesan = "";
-		$iPesan = "<div class='alert alert-success alert-dismissable fade show'>
+		$iPesan = "<div class='alert alert-success alert-dismissable'>
 				   <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button> $pesan </div>";
 
 		return $iPesan;
@@ -73,7 +73,7 @@ class Cview
 	public static function pesanGagal($pesan)
 	{
 		$iPesan = "";
-		$iPesan = "<div class='alert alert-danger alert-dismissable fade show'>
+		$iPesan = "<div class='alert alert-danger alert-dismissable'>
 		           <button type='button' class='close' aria-label='Close' data-dismiss='alert' aria-hidden='true'>×</button> $pesan</div>";
 
 		return $iPesan;
@@ -159,6 +159,25 @@ class Cview
 
 		$iOption = join($iOption, "");
 		return $iOption;
+	}
+
+	public static function StatusAnggota($val)
+	{
+		$iRes = "";
+
+		if($val == '0')
+			$iRes = "Pending";
+
+		elseif($val == '1')
+			$iRes = "Aktif";
+
+		elseif($val == '2')
+			$iRes = "Ditolak";
+
+		elseif($val == '5')
+			$iRes = "Tidak Aktif";
+
+		return $iRes;
 	}
 
 }

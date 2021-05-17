@@ -51,6 +51,12 @@
 	        	<!-- TRANSAKSI ================================= -->
 	        	<li class="nav-header">Transaksi</li>
 	        	<li class="nav-item">
+					<a href="{{ url('admin/anggota/verifikasi') }}" class="nav-link">
+						<i class="nav-icon fas fa-check"></i>
+						<p>Verifikasi Anggota</p>
+					</a>
+	        	</li>
+	        	<li class="nav-item">
 					<a href="{{ url('admin/anggota/informasi') }}" class="nav-link">
 						<i class="nav-icon fas fa-info"></i>
 						<p>Informasi Anggota</p>

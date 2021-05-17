@@ -43,7 +43,7 @@
                 <div class="col-md-4">
                     <div class="card card-widget widget-user">
                         <div class="widget-user-header bg-info">
-                            <h3 class="widget-user-username">{{ $row->namaanggota }}</h3>
+                            <a href='{{ url("admin/anggota/detail/$row->kodeanggota") }}'><h3 class="widget-user-username">{{ $row->namaanggota }}</h3></a>
                             <h5 class="widget-user-desc">{{ $row->useranggota }}</h5>
                         </div>
                         <div class="widget-user-image">
@@ -53,24 +53,25 @@
                             <div class="row">
                                 <div class="col-sm-4 border-right">
                                     <div class="description-block">
-                                        <h5 class="description-header">{{ $row->noteleponanggota }}</h5>
-                                        <span class="description-text">NO HP</span>
+                                        <h5 class="description-header">NO HP</h5>
+                                        <span class="description-text">{{ $row->noteleponanggota }}</span>
                                     </div>
                                 </div>
                                 <div class="col-sm-4 border-right">
                                     <div class="description-block">
-                                        <h5 class="description-header">{{ date('d F Y', strtotime($row->dateaddanggota)) }}</h5>
-                                        <span class="description-text">TANGGAL REG</span>
+                                        <h5 class="description-header">TANGGAL REG</h5>
+                                        <span class="description-text">{{ date('d F Y', strtotime($row->dateaddanggota)) }}</span>
                                     </div>
                                 </div>
                                 <div class="col-sm-4 border-right">
                                     <div class="description-block">
+                                        <h5 class="description-header">AKTIF SAMPAI</h5>
                                         @if($row->tanggalaktifsampai == "")
-                                            <h5 class="description-header">--</h5>
+                                            <span class="description-text">--</span>
                                         @else
-                                            <h5 class="description-header">{{ date('d F Y', strtotime($row->tanggalaktifsampai)) }}</h5>
+                                            <span class="description-text">{{ date('d F Y', strtotime($row->tanggalaktifsampai)) }}</span>
                                         @endif
-                                        <span class="description-text">AKTIF SAMPAI</span>
+                                        
                                     </div>
                                 </div>
                             </div>

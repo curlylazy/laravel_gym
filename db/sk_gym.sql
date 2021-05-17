@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 11 Bulan Mei 2021 pada 11.04
+-- Waktu pembuatan: 17 Bulan Mei 2021 pada 11.02
 -- Versi server: 10.4.10-MariaDB
 -- Versi PHP: 7.3.12
 
@@ -89,7 +89,8 @@ CREATE TABLE `tbl_anggota` (
   `alamatanggota` varchar(50) DEFAULT NULL,
   `jk` varchar(1) DEFAULT NULL,
   `tanggalaktifsampai` date DEFAULT NULL COMMENT 'tanggal aktif sampai kapan anggotanya.',
-  `statusanggota` int(1) DEFAULT NULL COMMENT '0  = pending, 1 = aktif, 2 = tidak aktif',
+  `alasanditolak` varchar(255) DEFAULT NULL,
+  `statusanggota` int(1) DEFAULT NULL COMMENT '0  = pending, 1 = aktif, 2 = ditolak, 5 = tidak aktif',
   `gambaranggota` varchar(100) DEFAULT NULL,
   `dateaddanggota` datetime DEFAULT NULL,
   `dateupdanggota` datetime DEFAULT NULL
@@ -99,10 +100,11 @@ CREATE TABLE `tbl_anggota` (
 -- Dumping data untuk tabel `tbl_anggota`
 --
 
-INSERT INTO `tbl_anggota` (`kodeanggota`, `useranggota`, `password`, `namaanggota`, `noteleponanggota`, `alamatanggota`, `jk`, `tanggalaktifsampai`, `statusanggota`, `gambaranggota`, `dateaddanggota`, `dateupdanggota`) VALUES
-('20210510-ANGGOTA001', 'saputrastyawan.d@gmail.com', 'eyJpdiI6IjJBb0hrOFFGdkRlbGVCZUZOK2JMamc9PSIsInZhbHVlIjoienZOenJCTzVnUzNPVHlGMlRWRVY4QT09IiwibWFjIjoiMDc0OGUyZTBiZjkwNDZkZjMzZjk2N2NmNDhmYzIxYzAyMzJhZTdiNWEwNzZkODk5MzZjOGI0ODdjNzE2NjE3ZSJ9', 'Saputra Styawan', '08636677384', 'Jalan Campuan Asri Blok BB no 67', 'L', NULL, 1, 'pic_1620722535_Andri_Andri.jpg', '2021-05-10 09:01:00', '2021-05-11 08:42:00'),
-('20210510-ANGGOTA002', 'arka@gmail.com', 'eyJpdiI6Ims0NDA1dTl1eGNNbERUZTVYRWNQaGc9PSIsInZhbHVlIjoiUkNjS3FZZU5IU0JTaGhEUWdBQ1doQT09IiwibWFjIjoiNTkwNWI4OTY2OGJmMmE3MDBjZWM0ZGJmZDA4OWFjNzExODliZDdhMjZmNDBiNjI2NjNmZTFhYzBmYmEzODFlMCJ9', 'Putu Arka Ardian', '08563735581', 'Jalan Pulau Biru No 68', 'L', NULL, 1, 'pic_1620637426_userbaby.jpeg', '2021-05-10 09:03:00', '2021-05-10 09:03:00'),
-('20210511-ANGGOTA003', 'chandra@gmail.com', 'eyJpdiI6ImR5a01laDNJSE55RlROZDNOQTFzMFE9PSIsInZhbHVlIjoiVEhwamczem0wTFBiODhSLy9uT0ROZz09IiwibWFjIjoiZTgwM2FmMjM2ZWI0YjExYWQzZTdmMDJhZDZiMmZhYzA5MmFiNDU4OTdhYjM5YjJhMzJmZGNkN2YwNmFhZWY5YiJ9', 'Ni Nyoman Chandra Dewi', '08563735581', 'Jalan Campuan Asri Blok BB no 67', 'L', NULL, 1, 'pic_1620722511_images.jpg', '2021-05-11 08:41:00', '2021-05-11 08:41:00');
+INSERT INTO `tbl_anggota` (`kodeanggota`, `useranggota`, `password`, `namaanggota`, `noteleponanggota`, `alamatanggota`, `jk`, `tanggalaktifsampai`, `alasanditolak`, `statusanggota`, `gambaranggota`, `dateaddanggota`, `dateupdanggota`) VALUES
+('20210510-ANGGOTA001', 'saputrastyawan.d@gmail.com', 'eyJpdiI6IjJBb0hrOFFGdkRlbGVCZUZOK2JMamc9PSIsInZhbHVlIjoienZOenJCTzVnUzNPVHlGMlRWRVY4QT09IiwibWFjIjoiMDc0OGUyZTBiZjkwNDZkZjMzZjk2N2NmNDhmYzIxYzAyMzJhZTdiNWEwNzZkODk5MzZjOGI0ODdjNzE2NjE3ZSJ9', 'Saputra Styawan', '08636677384', 'Jalan Campuan Asri Blok BB no 67', 'L', NULL, NULL, 1, 'pic_1620722535_Andri_Andri.jpg', '2021-05-10 09:01:00', '2021-05-11 08:42:00'),
+('20210510-ANGGOTA002', 'arka@gmail.com', 'eyJpdiI6Ims0NDA1dTl1eGNNbERUZTVYRWNQaGc9PSIsInZhbHVlIjoiUkNjS3FZZU5IU0JTaGhEUWdBQ1doQT09IiwibWFjIjoiNTkwNWI4OTY2OGJmMmE3MDBjZWM0ZGJmZDA4OWFjNzExODliZDdhMjZmNDBiNjI2NjNmZTFhYzBmYmEzODFlMCJ9', 'Putu Arka Ardian', '08563735581', 'Jalan Pulau Biru No 68', 'L', NULL, NULL, 1, 'pic_1620637426_userbaby.jpeg', '2021-05-10 09:03:00', '2021-05-10 09:03:00'),
+('20210511-ANGGOTA003', 'chandra@gmail.com', 'eyJpdiI6ImR5a01laDNJSE55RlROZDNOQTFzMFE9PSIsInZhbHVlIjoiVEhwamczem0wTFBiODhSLy9uT0ROZz09IiwibWFjIjoiZTgwM2FmMjM2ZWI0YjExYWQzZTdmMDJhZDZiMmZhYzA5MmFiNDU4OTdhYjM5YjJhMzJmZGNkN2YwNmFhZWY5YiJ9', 'Ni Nyoman Chandra Dewi', '08563735581', 'Jalan Campuan Asri Blok BB no 67', 'L', NULL, NULL, 1, 'pic_1620722511_images.jpg', '2021-05-11 08:41:00', '2021-05-11 08:41:00'),
+('20210517-ANGGOTA004', 'curlylazy@gmail.com', 'eyJpdiI6ImNSUTZDTHQ0UjAwaXdtZVUvTFp5RWc9PSIsInZhbHVlIjoiYVNlSHA5Y01IbEtiMWt4eTNpUHRhZz09IiwibWFjIjoiOTMxYjBmZGQyNTgxNjllODY5MjZkZjQ5NGI5MWM1ZGNjOGJlZDkzZDVhMzM2YzllZmZlMzY3MjNkOTc2OWI0YiJ9', 'Curly Frans Sanjaya', '08563735581', 'Jalan Campuan Asri Blok BB no 67', 'L', NULL, 'gunakan photo yang lebih jelas', 0, 'pic_1621237101_qCwxKctr_400x400.jpg', '2021-05-17 07:38:00', '2021-05-17 08:52:00');
 
 -- --------------------------------------------------------
 
