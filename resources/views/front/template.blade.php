@@ -92,15 +92,16 @@
                         <div class="col-xs-10 text-right menu-1">
                             <ul>
                                 <li><a href='{{ url("dashboard") }}'>Home</a></li>
-                                <li><a href='{{ url("alatgym") }}'>Alat Gym</a></li>
+                                <li><a href='{{ url("alatgym/list") }}'>Alat Gym</a></li>
+                                <li><a href='{{ url("informasi/list") }}'>Informasi</a></li>
 
                                 @if(empty(session('kodeanggota')))
                                     <li><a href='{{ url("auth/registrasi") }}'>Registrasi</a></li>
                                     <li><a href='{{ url("auth/login") }}'>Login</a></li>
                                 @else
                                     <li><a href='{{ url("auth/profile") }}'>Profile</a></li>
+                                    <li><a href='{{ url("auth/kartuanggota") }}'>Kartu Anggota</a></li>
                                     <li><a href='{{ url("pembayaran/list") }}'>Pembayaran</a></li>
-                                    <li><a href='{{ url("kartuanggota") }}'>Kartu Anggota</a></li>
                                     <li><a href='{{ url("kunjungan") }}'>Kunjungan</a></li>
                                     <li><a href='{{ url("auth/logout") }}'>Log Out</a></li>
                                 @endif
@@ -204,6 +205,10 @@
     <script src="{{ asset('cssfront/js/magnific-popup-options.js') }}"></script>
     <!-- Main -->
     <script src="{{ asset('cssfront/js/main.js') }}"></script>
+
+    <!-- Date Picker -->
+    <link href="{{ asset('cssadmin/plugins/datepicker/jquery.datetimepicker.css') }}" rel="stylesheet">
+    <script src="{{ asset('cssadmin/plugins/datepicker/jquery.datetimepicker.full.js') }}"></script>
 
     @stack('scripts')
 

@@ -10,6 +10,7 @@ use App\Http\Controllers\aAlatGym;
 use App\Http\Controllers\aInformasi;
 use App\Http\Controllers\aAuth;
 use App\Http\Controllers\aAnggota;
+use App\Http\Controllers\aKonfirmasi;
 
 // ajax
 use App\Http\Controllers\fAjax;
@@ -17,6 +18,8 @@ use App\Http\Controllers\fAjax;
 // controller pelanggan
 use App\Http\Controllers\fDashboard;
 use App\Http\Controllers\fAuth;
+use App\Http\Controllers\fPembayaran;
+use App\Http\Controllers\fInformasi;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,11 +64,22 @@ Route::any('/dashboard', [fDashboard::class, 'index']);
 Route::any('/auth/registrasi', [fAuth::class, 'registrasi']);
 Route::any('/auth/login', [fAuth::class, 'login']);
 Route::any('/auth/profile', [fAuth::class, 'profile']);
+Route::any('/auth/kartuanggota', [fAuth::class, 'kartuanggota']);
 Route::any('/auth/revisi/{id}', [fAuth::class, 'revisi']);
 Route::any('/auth/actlogin', [fAuth::class, 'actlogin']);
 Route::any('/auth/actregistrasi', [fAuth::class, 'actregistrasi']);
 Route::any('/auth/actrevisi', [fAuth::class, 'actrevisi']);
 Route::any('/auth/actupdateprofile', [fAuth::class, 'actupdateprofile']);
+
+// pembayaran
+Route::any('/pembayaran/list', [fPembayaran::class, 'list']);
+Route::any('/pembayaran/tambah', [fPembayaran::class, 'tambah']);
+Route::any('/pembayaran/edit/{id}', [fPembayaran::class, 'edit']);
+Route::any('/pembayaran/acttambah', [fPembayaran::class, 'acttambah']);
+Route::any('/pembayaran/actedit', [fPembayaran::class, 'actedit']);
+
+// informasi
+Route::any('/informasi/list', [fInformasi::class, 'list']);
 
 //  ================================= ADMIN ROUTE ===============================
 
@@ -104,6 +118,14 @@ Route::any('/admin/informasi/edit/{id}', [aInformasi::class, 'edit']);
 Route::any('/admin/informasi/acttambah', [aInformasi::class, 'acttambah']);
 Route::any('/admin/informasi/actedit', [aInformasi::class, 'actedit']);
 Route::any('/admin/informasi/acthapus/{id}', [aInformasi::class, 'acthapus']);
+
+// Konfirmasi
+Route::any('/admin/konfirmasi/list', [aKonfirmasi::class, 'list']);
+Route::any('/admin/konfirmasi/tambah', [aKonfirmasi::class, 'tambah']);
+Route::any('/admin/konfirmasi/detail/{id}', [aKonfirmasi::class, 'detail']);
+Route::any('/admin/konfirmasi/acttambah', [aKonfirmasi::class, 'acttambah']);
+Route::any('/admin/konfirmasi/actedit', [aKonfirmasi::class, 'actedit']);
+Route::any('/admin/konfirmasi/acthapus/{id}', [aKonfirmasi::class, 'acthapus']);
 
 // Anggota
 Route::any('/admin/anggota/list', [aAnggota::class, 'list']);

@@ -180,4 +180,20 @@ class Cview
 		return $iRes;
 	}
 
+	public static function StatusKonfirmasi($val)
+	{
+		$iRes = "";
+
+		if($val == '0')
+			$iRes = "Pending";
+
+		elseif($val == '1')
+			$iRes = "Valid";
+
+		elseif($val == '2')
+			$iRes = "Gagal";
+
+		return $iRes;
+	}
+
 }

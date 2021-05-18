@@ -88,6 +88,24 @@ class fAuth extends Controller
         return view("front/$this->prefix/profile", $data);
     }
 
+    public function kartuanggota()
+    {
+    	$id = session('kodeanggota');
+
+		// Judul Halaman
+		$data['prefix'] = $this->prefix;
+		$data['pesaninfo'] = "";
+		$data['iserror'] = false;
+
+        $data['rows'] = DB::table($this->baseTable)
+                        ->where('kodeanggota', '=', $id)
+                        ->first();
+
+        $data['password_dec'] = Crypt::decryptString($data['rows']->password);
+
+        return view("front/$this->prefix/kartuanggota", $data);
+    }
+
     public function actregistrasi(Request $request)
     {
         // pass request

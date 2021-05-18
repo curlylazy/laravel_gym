@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 17 Bulan Mei 2021 pada 11.05
+-- Waktu pembuatan: 18 Bulan Mei 2021 pada 11.03
 -- Versi server: 10.4.10-MariaDB
 -- Versi PHP: 7.3.12
 
@@ -104,7 +104,7 @@ INSERT INTO `tbl_anggota` (`kodeanggota`, `useranggota`, `password`, `namaanggot
 ('20210510-ANGGOTA001', 'saputrastyawan.d@gmail.com', 'eyJpdiI6IjJBb0hrOFFGdkRlbGVCZUZOK2JMamc9PSIsInZhbHVlIjoienZOenJCTzVnUzNPVHlGMlRWRVY4QT09IiwibWFjIjoiMDc0OGUyZTBiZjkwNDZkZjMzZjk2N2NmNDhmYzIxYzAyMzJhZTdiNWEwNzZkODk5MzZjOGI0ODdjNzE2NjE3ZSJ9', 'Saputra Styawan', '08636677384', 'Jalan Campuan Asri Blok BB no 67', 'L', NULL, NULL, 1, 'pic_1620722535_Andri_Andri.jpg', '2021-05-10 09:01:00', '2021-05-11 08:42:00'),
 ('20210510-ANGGOTA002', 'arka@gmail.com', 'eyJpdiI6Ims0NDA1dTl1eGNNbERUZTVYRWNQaGc9PSIsInZhbHVlIjoiUkNjS3FZZU5IU0JTaGhEUWdBQ1doQT09IiwibWFjIjoiNTkwNWI4OTY2OGJmMmE3MDBjZWM0ZGJmZDA4OWFjNzExODliZDdhMjZmNDBiNjI2NjNmZTFhYzBmYmEzODFlMCJ9', 'Putu Arka Ardian', '08563735581', 'Jalan Pulau Biru No 68', 'L', NULL, NULL, 1, 'pic_1620637426_userbaby.jpeg', '2021-05-10 09:03:00', '2021-05-10 09:03:00'),
 ('20210511-ANGGOTA003', 'chandra@gmail.com', 'eyJpdiI6ImR5a01laDNJSE55RlROZDNOQTFzMFE9PSIsInZhbHVlIjoiVEhwamczem0wTFBiODhSLy9uT0ROZz09IiwibWFjIjoiZTgwM2FmMjM2ZWI0YjExYWQzZTdmMDJhZDZiMmZhYzA5MmFiNDU4OTdhYjM5YjJhMzJmZGNkN2YwNmFhZWY5YiJ9', 'Ni Nyoman Chandra Dewi', '08563735581', 'Jalan Campuan Asri Blok BB no 67', 'L', NULL, NULL, 1, 'pic_1620722511_images.jpg', '2021-05-11 08:41:00', '2021-05-11 08:41:00'),
-('20210517-ANGGOTA004', 'curlylazy@gmail.com', 'eyJpdiI6ImNSUTZDTHQ0UjAwaXdtZVUvTFp5RWc9PSIsInZhbHVlIjoiYVNlSHA5Y01IbEtiMWt4eTNpUHRhZz09IiwibWFjIjoiOTMxYjBmZGQyNTgxNjllODY5MjZkZjQ5NGI5MWM1ZGNjOGJlZDkzZDVhMzM2YzllZmZlMzY3MjNkOTc2OWI0YiJ9', 'Curly Frans Sanjaya', '08563735581', 'Jalan Campuan Asri Blok BB no 67', 'L', NULL, 'gunakan photo yang lebih jelas', 0, 'pic_1621237101_qCwxKctr_400x400.jpg', '2021-05-17 07:38:00', '2021-05-17 08:52:00');
+('20210517-ANGGOTA004', 'curlylazy@gmail.com', 'eyJpdiI6IkE1U2FIajdDcDZiM1AxQkc3L2J0aXc9PSIsInZhbHVlIjoiTE1DVmtNZ2xyRFA4b2VxSlRXNWNVZz09IiwibWFjIjoiMDM4NDg5ZWQ2YzAxYmZhNjZjYWQ1NWM4YTVhZmI2OTExNjhhYTM4NDZmZGUwOTE4OTE1Y2M1ZDlmOWQxOTFjZiJ9', 'Curly Frans Sanjaya', '08563735581', 'Jalan Campuan Asri Blok BB no 67', 'L', '2021-07-17', 'gunakan photo yang lebih jelas', 1, 'pic_1621310651_peop.png', '2021-05-17 07:38:00', '2021-05-18 08:40:00');
 
 -- --------------------------------------------------------
 
@@ -127,7 +127,8 @@ CREATE TABLE `tbl_informasi` (
 --
 
 INSERT INTO `tbl_informasi` (`kodeinformasi`, `kodeadmin`, `judulinformasi`, `isiinformasi`, `statusinformasi`, `dateaddinformasi`, `dateupdinformasi`) VALUES
-('20210510-INFORMASI001', 'ADMIN001', 'Pengunguman Jam Buka', '<p>untuk jam buka selanjutnya kami mulai buka dari jam 9 pagi sampai dengan jam 5 sore, dimohon pengertiannya.</p>', 1, '2021-05-10 08:17:00', '2021-05-10 08:41:00');
+('20210510-INFORMASI001', 'ADMIN001', 'Pengunguman Jam Buka', '<p>untuk jam buka selanjutnya kami mulai buka dari jam 9 pagi sampai dengan jam 5 sore, dimohon pengertiannya.</p>', 1, '2021-05-10 08:17:00', '2021-05-10 08:41:00'),
+('20210518-INFORMASI002', 'ADMIN001', 'Pendaftaran Bisa DImulai Tanggal Mei', '<p><span style=\"color: rgb(32, 33, 36); font-family: arial, sans-serif;\">Sudah disebutkan di muka, pengertian&nbsp;</span><b style=\"color: rgb(32, 33, 36); font-family: arial, sans-serif;\">lorem</b><span style=\"color: rgb(32, 33, 36); font-family: arial, sans-serif;\">&nbsp;ipsum adalah sebuah template/teks standar yang difungsikan untuk menempatkan elemen grafis atau untuk membingkai penempatan/penataan huruf (typesetting) di dalam sebuah layout grafis, artikel, dan bisa juga digunakan pada sebuah presentasi</span><br></p>', 1, '2021-05-18 09:01:00', '2021-05-18 09:01:00');
 
 -- --------------------------------------------------------
 
@@ -142,12 +143,21 @@ CREATE TABLE `tbl_konfirmasi` (
   `bank` varchar(50) DEFAULT NULL,
   `an` varchar(50) DEFAULT NULL,
   `gambarbukti` varchar(100) DEFAULT NULL,
+  `alasangagal` varchar(100) DEFAULT NULL,
   `statuskonfirmasi` int(11) DEFAULT NULL COMMENT '0 = pending, 1 =  valid, 2 =gagal',
   `keterangangagal` text DEFAULT NULL,
   `tanggalkonfirmasi` date DEFAULT NULL,
   `dateaddkonfirmasi` datetime DEFAULT NULL,
   `dateupdkonfirmasi` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tbl_konfirmasi`
+--
+
+INSERT INTO `tbl_konfirmasi` (`kodekonfirmasi`, `kodeanggota`, `norek`, `bank`, `an`, `gambarbukti`, `alasangagal`, `statuskonfirmasi`, `keterangangagal`, `tanggalkonfirmasi`, `dateaddkonfirmasi`, `dateupdkonfirmasi`) VALUES
+('20210518-KONFIRMASI001', '20210517-ANGGOTA004', '909090909', 'BCA', 'Chandra Dewi Puteri', 'pic_1621322927_buktisedatu.jpg', 'bukti pembayaran tidak sesuai', 1, NULL, '2021-05-18', '2021-05-18 07:28:00', '2021-05-18 08:42:00'),
+('20210518-KONFIRMASI002', '20210517-ANGGOTA004', '909090909', 'BNI', 'Curly Da Lazy', 'pic_1621327481_buktisedatu.jpg', '', 1, NULL, '2021-05-18', '2021-05-18 08:44:00', '2021-05-18 08:44:00');
 
 -- --------------------------------------------------------
 
