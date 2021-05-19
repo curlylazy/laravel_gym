@@ -63,7 +63,7 @@
 					</a>
 	        	</li>
 	        	<li class="nav-item">
-					<a href="{{ url('admin/kunjungan') }}" class="nav-link">
+					<a href="{{ url('admin/kunjungan/tambah') }}" class="nav-link">
 						<i class="nav-icon fas fa-qrcode"></i>
 						<p>Kunjungan</p>
 					</a>

@@ -11,6 +11,7 @@ use App\Http\Controllers\aInformasi;
 use App\Http\Controllers\aAuth;
 use App\Http\Controllers\aAnggota;
 use App\Http\Controllers\aKonfirmasi;
+use App\Http\Controllers\aKunjungan;
 
 // ajax
 use App\Http\Controllers\fAjax;
@@ -20,6 +21,7 @@ use App\Http\Controllers\fDashboard;
 use App\Http\Controllers\fAuth;
 use App\Http\Controllers\fPembayaran;
 use App\Http\Controllers\fInformasi;
+use App\Http\Controllers\fAlatGym;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,6 +82,11 @@ Route::any('/pembayaran/actedit', [fPembayaran::class, 'actedit']);
 
 // informasi
 Route::any('/informasi/list', [fInformasi::class, 'list']);
+Route::any('/informasi/detail/{id}', [fInformasi::class, 'detail']);
+
+// alat gym
+Route::any('/alatgym/list', [fAlatGym::class, 'list']);
+Route::any('/alatgym/detail/{id}', [fAlatGym::class, 'detail']);
 
 //  ================================= ADMIN ROUTE ===============================
 
@@ -139,3 +146,9 @@ Route::any('/admin/anggota/acttambah', [aAnggota::class, 'acttambah']);
 Route::any('/admin/anggota/actedit', [aAnggota::class, 'actedit']);
 Route::any('/admin/anggota/actverifikasi', [aAnggota::class, 'actverifikasi']);
 Route::any('/admin/anggota/acthapus/{id}', [aAnggota::class, 'acthapus']);
+
+// Kunjungan
+Route::any('/admin/kunjungan/list', [aKunjungan::class, 'list']);
+Route::any('/admin/kunjungan/tambah', [aKunjungan::class, 'tambah']);
+Route::any('/admin/kunjungan/acttambah', [aKunjungan::class, 'acttambah']);
+Route::any('/admin/kunjungan/acthapus/{id}', [aKunjungan::class, 'acthapus']);

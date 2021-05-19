@@ -75,9 +75,13 @@
                         <div class="col-xs-12 text-right">
                             <p class="num">Call: +01 123 456 7890</p>
                             <ul class="fh5co-social">
-                                <li><a href="#"><i class="icon-twitter"></i></a></li>
-                                <li><a href="#"><i class="icon-dribbble"></i></a></li>
-                                <li><a href="#"><i class="icon-github"></i></a></li>
+                                @if(empty(session('kodeanggota')))
+                                    <li><a href='{{ url("auth/login") }}' style="color: white;">Login</a></li>
+                                    <li><a href='{{ url("auth/registrasi") }}' style="color: white;">Registrasi</a></li>
+                                @else
+                                    <li><a href='{{ url("auth/profile") }}' style="color: white;">({{ session('useranggota') }}) Profile</a></li>
+                                    <li><a href='{{ url("auth/logout") }}' style="color: white;">Log Out</a></li>
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -99,11 +103,10 @@
                                     <li><a href='{{ url("auth/registrasi") }}'>Registrasi</a></li>
                                     <li><a href='{{ url("auth/login") }}'>Login</a></li>
                                 @else
-                                    <li><a href='{{ url("auth/profile") }}'>Profile</a></li>
                                     <li><a href='{{ url("auth/kartuanggota") }}'>Kartu Anggota</a></li>
                                     <li><a href='{{ url("pembayaran/list") }}'>Pembayaran</a></li>
                                     <li><a href='{{ url("kunjungan") }}'>Kunjungan</a></li>
-                                    <li><a href='{{ url("auth/logout") }}'>Log Out</a></li>
+                                    
                                 @endif
 
                             </ul>

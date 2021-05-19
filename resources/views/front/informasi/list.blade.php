@@ -41,11 +41,11 @@ $(document).ready(function() {
                 <div class="col-lg-4 col-md-4">
                     <div class="fh5co-blog animate-box">
                         <div class="blog-text">
-                            <h3><a href=""#>{{ $row->judulinformasi }}</a></h3>
+                            <h3><a href='{{ url("informasi/detail/$row->kodeinformasi") }}'>{{ $row->judulinformasi }}</a></h3>
                             <span class="posted_on">{{ date('d F Y', strtotime($row->dateaddinformasi)) }}</span>
                             <span class="comment"><a href="">by : {{ $row->namaadmin }}</a></span>
                             <p>{{ substr(strip_tags($row->isiinformasi), 0, 100) }} ..</p>
-                            <a href="#" class="btn btn-primary">Read More</a>
+                            <a href='{{ url("informasi/detail/$row->kodeinformasi") }}' class="btn btn-primary">Selengkapnya..</a>
                         </div> 
                     </div>
                 </div>

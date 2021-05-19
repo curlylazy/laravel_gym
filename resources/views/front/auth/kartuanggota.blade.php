@@ -51,8 +51,10 @@ $(document).ready(function() {
 
                 @if($rows->tanggalaktifsampai == '')
                     <h3><small>Tanggal Aktif Sampai</small><br />belum melakukan pembayaran</h3>
+                @elseif(date('Y-m-d') > $rows->tanggalaktifsampai)
+                    <h3><small>Tanggal Aktif Sampai</small><br /> {{ date('d F Y', strtotime($rows->tanggalaktifsampai)) }} (masa aktif sudah habis)
                 @else
-                    <h3><small>Tanggal Aktif Sampai</small><br />{{ $rows->tanggalaktifsampai }}</h3>
+                    <h3><small>Tanggal Aktif Sampai</small><br />{{ date('d F Y', strtotime($rows->tanggalaktifsampai)) }}</h3>
                 @endif
 
                 

@@ -16,17 +16,17 @@ use App\Lib\Cupload;
 use App\Lib\Cfilter;
 use App\Lib\Cview;
 
-use App\Http\Controllers\fInformasi;
+use App\Http\Controllers\fAlatGym;
 
-class fInformasi extends Controller
+class fAlatGym extends Controller
 {
 	public function __construct()
     {
 		// page data
 		$this->pesan = "";
-    	$this->baseTable = "tbl_informasi";
-    	$this->prefix = "informasi";
-    	$this->pagename = "Informasi";
+    	$this->baseTable = "tbl_alat_gym";
+    	$this->prefix = "alatgym";
+    	$this->pagename = "Alat Gym";
     }
 
     public function list(Request $request)
@@ -36,8 +36,8 @@ class fInformasi extends Controller
 		$data['pagename'] = $this->pagename;
 
         $rows = DB::table($this->baseTable)
-                ->join('tbl_admin', 'tbl_admin.kodeadmin', '=', 'tbl_informasi.kodeadmin')
-                ->where('tbl_informasi.statusinformasi', '=', 1)
+                ->join('tbl_admin', 'tbl_admin.kodeadmin', '=', 'tbl_alat_gym.kodeadmin')
+                ->where('tbl_alat_gym.statusalatgym', '=', 1)
                 ->simplePaginate(8);
 
         $data['paging_transaksi'] = $rows;
@@ -51,8 +51,8 @@ class fInformasi extends Controller
         $this->middleware('cekloginfront');
 
         $data['rows'] = DB::table($this->baseTable)
-                        ->join('tbl_admin', 'tbl_admin.kodeadmin', '=', 'tbl_informasi.kodeadmin')
-                        ->where('tbl_informasi.kodeinformasi', '=', $id)
+                        ->join('tbl_admin', 'tbl_admin.kodeadmin', '=', 'tbl_alat_gym.kodeadmin')
+                        ->where('tbl_alat_gym.kodealatgym', '=', $id)
                         ->first();
 
         // Judul Halaman
