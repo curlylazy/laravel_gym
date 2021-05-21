@@ -21,7 +21,7 @@ $(document).ready(function() {
         <div class="row">
             <div class="col-md-8 col-md-offset-2 text-center" style="margin-top: 50px;">
                 <h1 style="color: white;">ALAT GYM</h1>
-                <p>pengenalan alat alat gym yang ada di Tiger Gym</p>
+                <p style="color: white;">pengenalan alat alat gym yang ada di Tiger Gym</p>
             </div>
         </div>
     </div>

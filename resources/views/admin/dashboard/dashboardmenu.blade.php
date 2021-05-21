@@ -92,6 +92,47 @@ $(document).ready(function() {
                 </div>
             </div>
 
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Kunjungan Hari Ini <b>{{ date('d F Y') }}</b></h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered" id="myTable">
+                            <thead>
+                                <tr>
+                                    <th>Kode</th>
+                                    <th>Useranggota</th>
+                                    <th>Nama</th>
+                                    <td>Operator</td>
+                                    <td>Tanggal</td>
+                                    <td>Waktu</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($rows_kunjungan as $row)
+
+                                    <tr>
+                                        <td>{{ $row->kodekunjungan }}</td>
+                                        <td>{{ $row->useranggota }}</td>
+                                        <td>{{ $row->namaanggota }}</td>
+                                        <td>{{ $row->namaadmin }}</td>
+                                        <td>{{ date('d F Y', strtotime($row->dateaddkunjungan)) }}</td>
+                                        @if(!empty($row->waktudatang))
+                                            <td><i class="fas fa-arrow-right"></i> [Datang] {{ date('H:i:s', strtotime($row->waktudatang)) }}</td>
+                                        @else
+                                            <td><i class="fas fa-arrow-left"></i> [Pulang] {{ date('H:i:s', strtotime($row->waktupulang)) }}</td>
+                                        @endif
+                                    </tr>
+
+                                @endforeach
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>

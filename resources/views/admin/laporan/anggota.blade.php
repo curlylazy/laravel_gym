@@ -1,13 +1,24 @@
 @extends('admin/template')
 
 @push('scripts')
-    <script type="text/javascript">
-        $(document).ready(function() {
-        	$('#myTable').DataTable({"ordering": false});
-        });
-    </script>
-@endpush
+<script type="text/javascript">
 
+$(document).ready(function() {
+    $("#katakunci").val("{{ $katakunci }}");
+
+    $("#cari").click(function() {
+        $("#form1").attr("action", "{{ url('admin/laporan/anggota') }}");
+        $("#form1").submit();
+    });
+
+    $("#cetak").click(function() {
+        $("#form1").attr("action", "{{ url('admin/laporan/cetak/anggota') }}");
+        $("#form1").submit();
+    });
+});
+
+</script>
+@endpush
 
 @section('content')
 
@@ -39,42 +50,53 @@
         @endif
 
         <div class="row">
+
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <table class="table table-bordered" id="myTable">
+                        <form id="form1" enctype="multipart/form-data" method="post" id="form1">
+                            
+                            @csrf
+
+                            <div class="form-group">
+                                <label for="konfirmasi_status">Katakunci</label>
+                                <input type="text" class="form-control" name="katakunci" id="katakunci">
+                            </div>
+
+                            <button class="btn btn-warning" type="button" id="cari"><i class="fa fa-search"></i> CARI</button>
+                            <button class="btn btn-info" type="button" id="cetak"><i class="fa fa-print"></i> CETAK</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th>Kode</th>
                                     <th>Useranggota</th>
                                     <th>Nama</th>
-                                    <td>Operator</td>
-                                    <td>Tanggal</td>
-                                    <td>Waktu</td>
-                                    <th>Aksi</th>
+                                    <th>JK</th>
+                                    <th>Telepon</th>
+                                    <th>Alamat</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($rows as $row)
 
                                     <tr>
-                                        <td>{{ $row->kodekunjungan }}</td>
+                                        <td>{{ $row->kodeanggota }}</td>
                                         <td>{{ $row->useranggota }}</td>
                                         <td>{{ $row->namaanggota }}</td>
-                                        <td>{{ $row->namaadmin }}</td>
-                                        <td>{{ date('d F Y', strtotime($row->dateaddkunjungan)) }}</td>
-                                        @if(!empty($row->waktudatang))
-                                            <td><i class="fas fa-arrow-right"></i> [Datang] {{ date('H:i:s', strtotime($row->waktudatang)) }}</td>
-                                        @else
-                                            <td><i class="fas fa-arrow-left"></i> [Pulang] {{ date('H:i:s', strtotime($row->waktupulang)) }}</td>
-                                        @endif
-                                        <td>
-                                            <a class="btn btn-danger btn-sm" onclick="return confirm('Hapus data {{ $row->kodekunjungan }} ? ')" href='{{ url("admin/$prefix/acthapus/$row->kodekunjungan") }}'><i class="fa fa-trash"></i></a>
-                                        </td>
+                                        <td>{{ $row->jk }}</td>
+                                        <td>{{ $row->noteleponanggota }}</td>
+                                        <td>{{ $row->alamatanggota }}</td>
                                     </tr>
 
                                 @endforeach
-
                             </tbody>
                         </table>
                     </div>

@@ -12,6 +12,7 @@ use App\Http\Controllers\aAuth;
 use App\Http\Controllers\aAnggota;
 use App\Http\Controllers\aKonfirmasi;
 use App\Http\Controllers\aKunjungan;
+use App\Http\Controllers\aLaporan;
 
 // ajax
 use App\Http\Controllers\fAjax;
@@ -22,6 +23,7 @@ use App\Http\Controllers\fAuth;
 use App\Http\Controllers\fPembayaran;
 use App\Http\Controllers\fInformasi;
 use App\Http\Controllers\fAlatGym;
+use App\Http\Controllers\fKunjungan;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,6 +70,7 @@ Route::any('/auth/login', [fAuth::class, 'login']);
 Route::any('/auth/profile', [fAuth::class, 'profile']);
 Route::any('/auth/kartuanggota', [fAuth::class, 'kartuanggota']);
 Route::any('/auth/revisi/{id}', [fAuth::class, 'revisi']);
+Route::any('/auth/logout', [fAuth::class, 'actlogout']);
 Route::any('/auth/actlogin', [fAuth::class, 'actlogin']);
 Route::any('/auth/actregistrasi', [fAuth::class, 'actregistrasi']);
 Route::any('/auth/actrevisi', [fAuth::class, 'actrevisi']);
@@ -87,6 +90,10 @@ Route::any('/informasi/detail/{id}', [fInformasi::class, 'detail']);
 // alat gym
 Route::any('/alatgym/list', [fAlatGym::class, 'list']);
 Route::any('/alatgym/detail/{id}', [fAlatGym::class, 'detail']);
+
+// kunjungan
+Route::any('/kunjungan/actsetfilter', [fKunjungan::class, 'actsetfilter']);
+Route::any('/kunjungan/list', [fKunjungan::class, 'list']);
 
 //  ================================= ADMIN ROUTE ===============================
 
@@ -152,3 +159,9 @@ Route::any('/admin/kunjungan/list', [aKunjungan::class, 'list']);
 Route::any('/admin/kunjungan/tambah', [aKunjungan::class, 'tambah']);
 Route::any('/admin/kunjungan/acttambah', [aKunjungan::class, 'acttambah']);
 Route::any('/admin/kunjungan/acthapus/{id}', [aKunjungan::class, 'acthapus']);
+
+// Laporan
+Route::any('/admin/laporan/anggota', [aLaporan::class, 'anggota'])->middleware('ceklogin');
+Route::any('/admin/laporan/kunjungan', [aLaporan::class, 'kunjungan'])->middleware('ceklogin');
+Route::any('/admin/laporan/cetak/anggota', [aLaporan::class, 'cetak_anggota'])->middleware('ceklogin');
+Route::any('/admin/laporan/cetak/kunjungan', [aLaporan::class, 'cetak_kunjungan'])->middleware('ceklogin');

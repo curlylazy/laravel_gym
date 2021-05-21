@@ -44,7 +44,9 @@ class aKunjungan extends Controller
 		// passing function ke view
 		$data['rows'] = DB::table($this->baseTable)
                         ->select('*')
-						->orderBy('kodekunjungan', 'desc')
+                        ->join('tbl_admin', 'tbl_admin.kodeadmin', '=', 'tbl_kunjungan.kodeadmin')
+                        ->join('tbl_anggota', 'tbl_anggota.kodeanggota', '=', 'tbl_kunjungan.kodeanggota')
+						->orderBy('tbl_kunjungan.kodekunjungan', 'desc')
 						->get();
 
         return view("admin/$this->prefix/list", $data);
@@ -130,55 +132,16 @@ class aKunjungan extends Controller
 
     }
 
-    public function actedit(Request $request)
-    {
-        // Update Data
-
-		DB::beginTransaction();
-
-		try {
-
-			$id = Cfilter::FilterString($request->input('kodeinformasi'));
-
-			// update user
-			DB::table($this->baseTable)
-	            ->where('kodeinformasi', "=", $id)
-	            ->update
-	            ([
-		            'judulinformasi' => Cfilter::FilterString($request->input('judulinformasi')),
-		            'isiinformasi' => $request->input('isiinformasi'),
-                	'dateupdinformasi' => Cfilter::FilterString(date("Y-m-d H:i")),
-	            ]);
-
-		    DB::commit();
-		} catch (\Exception $ex) {
-		    DB::rollback();
-			$this->pesaninfo = Cview::pesanGagal("Kesalahan Update Data : <b>".$ex->getMessage()."</b>");
-			return redirect()->action([aKunjungan::class, 'edit'], ['id' => $id])->with('pesaninfo', $this->pesaninfo)->with('erroract', true)->withInput();
-		}
-
-		// jika berhasil
-		$this->pesaninfo = Cview::pesanSukses("Berhasil Update Data : <b>".$request->input('kodeinformasi')."</b>");
-		return redirect()->action([aKunjungan::class, 'edit'], ['id' => $id])->with('pesaninfo', $this->pesaninfo);
-
-    }
-
     public function acthapus($id)
     {
 		DB::beginTransaction();
 
         try
         {
-        	DB::table($this->baseTable)
-	            ->where('kodeinformasi', "=", $id)
-	            ->update
-	            ([
-		            'statusinformasi' => Cfilter::FilterInt(2),
-	            ]);
 
-            // DB::table($this->baseTable)
-            //     ->where('kodeinformasi', '=', $id)
-            //     ->delete();
+            DB::table($this->baseTable)
+                ->where('kodekunjungan', '=', $id)
+                ->delete();
 
 		    DB::commit();
 

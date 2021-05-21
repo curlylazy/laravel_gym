@@ -69,6 +69,12 @@
 					</a>
 	        	</li>
 	        	<li class="nav-item">
+					<a href="{{ url('admin/kunjungan/list') }}" class="nav-link">
+						<i class="nav-icon fas fa-calendar"></i>
+						<p>History Kunjungan</p>
+					</a>
+	        	</li>
+	        	<li class="nav-item">
 					<a href="{{ url('admin/konfirmasi/list') }}" class="nav-link">
 						<i class="nav-icon fas fa-dollar-sign"></i>
 						<p>Konfirmasi</p>
@@ -84,9 +90,9 @@
 					</a>
 	        	</li>
 	        	<li class="nav-item">
-					<a href="{{ url('admin/laporan/konfirmasi') }}" class="nav-link">
+					<a href="{{ url('admin/laporan/kunjungan') }}" class="nav-link">
 						<i class="nav-icon fas fa-book"></i>
-						<p>Lap. Konfirmasi</p>
+						<p>Lap. Kunjungan</p>
 					</a>
 	        	</li>
 

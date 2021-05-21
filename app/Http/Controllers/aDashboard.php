@@ -49,7 +49,15 @@ class aDashboard extends Controller
 
 		$data['jml_kunjungan'] = DB::table('tbl_kunjungan')
 							->where(DB::raw("(DATE_FORMAT(dateaddkunjungan,'%Y-%m'))"), date("Y-m"))
+							->whereNotNull('waktudatang')
 							->count();
+
+		$data['rows_kunjungan'] = DB::table("tbl_kunjungan")
+                        ->select('*')
+                        ->join('tbl_admin', 'tbl_admin.kodeadmin', '=', 'tbl_kunjungan.kodeadmin')
+                        ->join('tbl_anggota', 'tbl_anggota.kodeanggota', '=', 'tbl_kunjungan.kodeanggota')
+						->orderBy('tbl_kunjungan.kodekunjungan', 'desc')
+						->get();
 
         return view('admin/dashboard/dashboardmenu', $data);
     }

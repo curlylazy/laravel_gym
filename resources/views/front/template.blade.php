@@ -53,6 +53,9 @@
     <!-- Theme style  -->
     <link rel="stylesheet" href="{{ asset('cssfront/css/style.css') }}">
 
+    <!-- Font  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
     @stack('stylecss')
 
     <!-- Modernizr JS -->
@@ -105,7 +108,7 @@
                                 @else
                                     <li><a href='{{ url("auth/kartuanggota") }}'>Kartu Anggota</a></li>
                                     <li><a href='{{ url("pembayaran/list") }}'>Pembayaran</a></li>
-                                    <li><a href='{{ url("kunjungan") }}'>Kunjungan</a></li>
+                                    <li><a href='{{ url("kunjungan/list") }}'>Kunjungan</a></li>
                                     
                                 @endif
 
@@ -212,7 +215,7 @@
     <!-- Date Picker -->
     <link href="{{ asset('cssadmin/plugins/datepicker/jquery.datetimepicker.css') }}" rel="stylesheet">
     <script src="{{ asset('cssadmin/plugins/datepicker/jquery.datetimepicker.full.js') }}"></script>
-
+    
     @stack('scripts')
 
     </body>

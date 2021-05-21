@@ -21,7 +21,7 @@ $(document).ready(function() {
         <div class="row">
             <div class="col-md-8 col-md-offset-2 text-center" style="margin-top: 50px;">
                 <h1 style="color: white;">KARTU ANGGOTA</h1>
-                <p>digunakan saat anda berkunjung ke Gym</p>
+                <p style="color: white;">digunakan saat anda berkunjung ke Gym</p>
             </div>
         </div>
     </div>
