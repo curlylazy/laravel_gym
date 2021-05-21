@@ -25,11 +25,11 @@
 	        	<tr>
 	        		<th style="width: 100px;">No</th>
 					<th>Kode</th>
-                    <th>Nelayan</th>
-                    <th>Pelanggan</th>
-                    <th>Total Transaksi</th>
-                    <th>Tanggal</th>
-                    <th>Status Konfirmasi</th>
+                    <th>Useranggota</th>
+                    <th>Nama</th>
+                    <td>Operator</td>
+                    <td>Tanggal</td>
+                    <td>Waktu</td>
 	        	</tr>
         	</thead>
 
@@ -43,12 +43,16 @@
 
 	            <tr>
                     <td>{{ $no }}</td>
-                    <td>{{ $row->kodetransaksi }}</td>
-                    <td>{{ $row->usernelayan }} - {{ $row->namanelayan }}</td>
-                    <td>{{ $row->namapelanggan }}</td>
-                    <td>{{ number_format($row->totaltransaksi) }}</td>
-                    <td>{{ date('d F Y', strtotime($row->dateaddtransaksi)) }}</td>
-                    <td>{{ App\Lib\Csql::cekStatusKonfirmasi($row->konfirmasi_status) }}</td>
+                    <td>{{ $row->kodekunjungan }}</td>
+                    <td>{{ $row->useranggota }}</td>
+                    <td>{{ $row->namaanggota }}</td>
+                    <td>{{ $row->namaadmin }}</td>
+                    <td>{{ date('d F Y', strtotime($row->dateaddkunjungan)) }}</td>
+                    @if(!empty($row->waktudatang))
+                        <td><i class="fas fa-arrow-right"></i> [Datang] {{ date('H:i:s', strtotime($row->waktudatang)) }}</td>
+                    @else
+                        <td><i class="fas fa-arrow-left"></i> [Pulang] {{ date('H:i:s', strtotime($row->waktupulang)) }}</td>
+                    @endif
                 </tr>
 
 	            @php

@@ -145,6 +145,42 @@ class aLaporan extends Controller
         return view("admin/$this->prefix/kunjungan", $data);
     }
 
+    public function cetak_kunjungan(Request $request)
+    {
+        $katakunci = Cfilter::FilterString($request->input('katakunci'));
+        $tanggaldari = Cfilter::FilterString($request->input('tanggaldari'));
+        $tanggalsampai = Cfilter::FilterString($request->input('tanggalsampai'));
+
+        $data['judul'] = "Laporan Kunjungan";
+
+        $data['keterangan'] = "";
+
+        if(!empty($katakunci))
+        {
+            $data['keterangan'] = "katakunci : $katakunci - Periode : $tanggaldari s/d $tanggalsampai <br />";
+        }
+
+        $data['keterangan'] .= "laporan cetak kunjungan Tiger Gym.";
+
+        $this->baseTable = "tbl_kunjungan";
+
+        // passing function ke view
+        $data['rows'] = DB::table($this->baseTable)
+                        ->select('*')
+                        ->join('tbl_anggota', 'tbl_anggota.kodeanggota', '=', 'tbl_kunjungan.kodeanggota')
+                        ->join('tbl_admin', 'tbl_admin.kodeadmin', '=', 'tbl_kunjungan.kodeadmin')
+                        ->where('tbl_anggota.namaanggota', 'like', "%$katakunci%")
+                        ->where('tbl_anggota.useranggota', 'like', "%$katakunci%")
+                        ->whereBetween('tbl_kunjungan.dateaddkunjungan', [$tanggaldari, $tanggalsampai])
+                        ->orderBy('tbl_kunjungan.kodekunjungan', 'desc')
+                        ->get();
+
+        $pdf = PDF::loadView('admin/laporan/cetak_kunjungan', $data)
+               ->setPaper('a4', 'landscape');
+
+        return $pdf->stream();
+    }
+
     // ================= END ===================================
 
 
