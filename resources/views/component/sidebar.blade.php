@@ -48,18 +48,6 @@
 						</a>
 		        	</li>
 		        	<li class="nav-item">
-						<a href="{{ url('admin/alatgym/list') }}" class="nav-link">
-							<i class="nav-icon fas fa-box"></i>
-							<p>Alat Gym</p>
-						</a>
-		        	</li>
-		        	<li class="nav-item">
-						<a href="{{ url('admin/informasi/list') }}" class="nav-link">
-							<i class="nav-icon fas fa-newspaper"></i>
-							<p>Informasi</p>
-						</a>
-		        	</li>
-		        	<li class="nav-item">
 						<a href="{{ url('admin/anggota/list') }}" class="nav-link">
 							<i class="nav-icon fas fa-users"></i>
 							<p>Anggota</p>
@@ -71,6 +59,18 @@
 
 	        	<!-- TRANSAKSI ================================= -->
 	        	<li class="nav-header">Transaksi</li>
+	        	<li class="nav-item">
+					<a href="{{ url('admin/alatgym/list') }}" class="nav-link">
+						<i class="nav-icon fas fa-box"></i>
+						<p>Alat Gym</p>
+					</a>
+	        	</li>
+	        	<li class="nav-item">
+					<a href="{{ url('admin/informasi/list') }}" class="nav-link">
+						<i class="nav-icon fas fa-newspaper"></i>
+						<p>Informasi</p>
+					</a>
+	        	</li>
 	        	<li class="nav-item">
 					<a href="{{ url('admin/anggota/verifikasi') }}" class="nav-link">
 						<i class="nav-icon fas fa-check"></i>

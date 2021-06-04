@@ -56,6 +56,7 @@ class aDashboard extends Controller
                         ->select('*')
                         ->join('tbl_admin', 'tbl_admin.kodeadmin', '=', 'tbl_kunjungan.kodeadmin')
                         ->join('tbl_anggota', 'tbl_anggota.kodeanggota', '=', 'tbl_kunjungan.kodeanggota')
+                        ->where(DB::raw("(DATE_FORMAT(tbl_kunjungan.dateaddkunjungan,'%Y-%m'))"), date("Y-m"))
 						->orderBy('tbl_kunjungan.kodekunjungan', 'desc')
 						->get();
 
