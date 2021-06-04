@@ -102,22 +102,20 @@
 					</a>
 	        	</li>
 
-	        	@if(session('akses') == 'ADMIN')
-		        	<!-- LAPORAN ================================= -->
-		        	<li class="nav-header">Laporan</li>
-		        	<li class="nav-item">
-						<a href="{{ url('admin/laporan/anggota') }}" class="nav-link">
-							<i class="nav-icon fas fa-book"></i>
-							<p>Lap. Anggota</p>
-						</a>
-		        	</li>
-		        	<li class="nav-item">
-						<a href="{{ url('admin/laporan/kunjungan') }}" class="nav-link">
-							<i class="nav-icon fas fa-book"></i>
-							<p>Lap. Kunjungan</p>
-						</a>
-		        	</li>
-	        	@endif
+	        	<!-- LAPORAN ================================= -->
+	        	<li class="nav-header">Laporan</li>
+	        	<li class="nav-item">
+					<a href="{{ url('admin/laporan/anggota') }}" class="nav-link">
+						<i class="nav-icon fas fa-book"></i>
+						<p>Lap. Anggota</p>
+					</a>
+	        	</li>
+	        	<li class="nav-item">
+					<a href="{{ url('admin/laporan/kunjungan') }}" class="nav-link">
+						<i class="nav-icon fas fa-book"></i>
+						<p>Lap. Kunjungan</p>
+					</a>
+	        	</li>
 
 	    	</ul>
 	    </nav>
