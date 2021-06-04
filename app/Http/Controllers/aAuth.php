@@ -158,6 +158,7 @@ class aAuth extends Controller
 				'kodeadmin' => $rows[0]->kodeadmin,
 				'useradmin' => $rows[0]->useradmin,
 				'namaadmin' => $rows[0]->namaadmin,
+				'akses' => $rows[0]->akses,
 				'waktu' => date('Y-m-d H:i'),
 			]);
 
