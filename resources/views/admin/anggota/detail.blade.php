@@ -91,8 +91,7 @@
                         
                     </div>
                     <div class="card-footer">
-                        <a class="btn btn-warning" href='{{ url("admin/$prefix/list") }}'><i class="fa fa-backward"></i> KEMBALI</a>
-                        <button class="btn btn-info" type="button" id="simpan"><i class="fa fa-save"></i> SIMPAN</button>
+                        <a class="btn btn-warning" href='{{ url("admin/informasi/list") }}'><i class="fa fa-backward"></i> KEMBALI</a>
                     </div>
                 </div>
             </div>
