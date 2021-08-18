@@ -38,7 +38,8 @@ class fAlatGym extends Controller
         $rows = DB::table($this->baseTable)
                 ->join('tbl_admin', 'tbl_admin.kodeadmin', '=', 'tbl_alat_gym.kodeadmin')
                 ->where('tbl_alat_gym.statusalatgym', '=', 1)
-                ->simplePaginate(8);
+                ->get();
+                // ->simplePaginate(8);
 
         $data['paging_transaksi'] = $rows;
         $data['rows'] = $rows;

@@ -100,65 +100,65 @@ Route::any('/kunjungan/list', [fKunjungan::class, 'list']);
 Route::any('/admin', [aAuth::class, 'login']);
 
 // Dashboard
-Route::any('/admin/dashboard', [aDashboard::class, 'index']);
+Route::any('/admin/dashboard', [aDashboard::class, 'index'])->middleware('ceklogin');
 
 // Auth
 Route::any('/admin/auth/login', [aAuth::class, 'login']);
-Route::any('/admin/auth/profile', [aAuth::class, 'profile']);
+Route::any('/admin/auth/profile', [aAuth::class, 'profile'])->middleware('ceklogin');
 Route::any('/admin/auth/actlogin', [aAuth::class, 'actlogin']);
 Route::any('/admin/auth/actlogout', [aAuth::class, 'actlogout']);
-Route::any('/admin/auth/actupdateprofile', [aAuth::class, 'actupdateprofile']);
+Route::any('/admin/auth/actupdateprofile', [aAuth::class, 'actupdateprofile'])->middleware('ceklogin');
 
 // Staff
-Route::any('/admin/staff/list', [aStaff::class, 'list']);
-Route::any('/admin/staff/tambah', [aStaff::class, 'tambah']);
-Route::any('/admin/staff/edit/{id}', [aStaff::class, 'edit']);
-Route::any('/admin/staff/acttambah', [aStaff::class, 'acttambah']);
-Route::any('/admin/staff/actedit', [aStaff::class, 'actedit']);
-Route::any('/admin/staff/acthapus/{id}', [aStaff::class, 'acthapus']);
+Route::any('/admin/staff/list', [aStaff::class, 'list'])->middleware('ceklogin');
+Route::any('/admin/staff/tambah', [aStaff::class, 'tambah'])->middleware('ceklogin');
+Route::any('/admin/staff/edit/{id}', [aStaff::class, 'edit'])->middleware('ceklogin');
+Route::any('/admin/staff/acttambah', [aStaff::class, 'acttambah'])->middleware('ceklogin');
+Route::any('/admin/staff/actedit', [aStaff::class, 'actedit'])->middleware('ceklogin');
+Route::any('/admin/staff/acthapus/{id}', [aStaff::class, 'acthapus'])->middleware('ceklogin');
 
 // Alat GYM
-Route::any('/admin/alatgym/list', [aAlatGym::class, 'list']);
-Route::any('/admin/alatgym/tambah', [aAlatGym::class, 'tambah']);
-Route::any('/admin/alatgym/edit/{id}', [aAlatGym::class, 'edit']);
-Route::any('/admin/alatgym/acttambah', [aAlatGym::class, 'acttambah']);
-Route::any('/admin/alatgym/actedit', [aAlatGym::class, 'actedit']);
-Route::any('/admin/alatgym/acthapus/{id}', [aAlatGym::class, 'acthapus']);
+Route::any('/admin/alatgym/list', [aAlatGym::class, 'list'])->middleware('ceklogin');
+Route::any('/admin/alatgym/tambah', [aAlatGym::class, 'tambah'])->middleware('ceklogin');
+Route::any('/admin/alatgym/edit/{id}', [aAlatGym::class, 'edit'])->middleware('ceklogin');
+Route::any('/admin/alatgym/acttambah', [aAlatGym::class, 'acttambah'])->middleware('ceklogin');
+Route::any('/admin/alatgym/actedit', [aAlatGym::class, 'actedit'])->middleware('ceklogin');
+Route::any('/admin/alatgym/acthapus/{id}', [aAlatGym::class, 'acthapus'])->middleware('ceklogin');
 
 // Informasi
-Route::any('/admin/informasi/list', [aInformasi::class, 'list']);
-Route::any('/admin/informasi/tambah', [aInformasi::class, 'tambah']);
-Route::any('/admin/informasi/edit/{id}', [aInformasi::class, 'edit']);
-Route::any('/admin/informasi/acttambah', [aInformasi::class, 'acttambah']);
-Route::any('/admin/informasi/actedit', [aInformasi::class, 'actedit']);
-Route::any('/admin/informasi/acthapus/{id}', [aInformasi::class, 'acthapus']);
+Route::any('/admin/informasi/list', [aInformasi::class, 'list'])->middleware('ceklogin');
+Route::any('/admin/informasi/tambah', [aInformasi::class, 'tambah'])->middleware('ceklogin');
+Route::any('/admin/informasi/edit/{id}', [aInformasi::class, 'edit'])->middleware('ceklogin');
+Route::any('/admin/informasi/acttambah', [aInformasi::class, 'acttambah'])->middleware('ceklogin');
+Route::any('/admin/informasi/actedit', [aInformasi::class, 'actedit'])->middleware('ceklogin');
+Route::any('/admin/informasi/acthapus/{id}', [aInformasi::class, 'acthapus'])->middleware('ceklogin');
 
 // Konfirmasi
-Route::any('/admin/konfirmasi/list', [aKonfirmasi::class, 'list']);
-Route::any('/admin/konfirmasi/tambah', [aKonfirmasi::class, 'tambah']);
-Route::any('/admin/konfirmasi/detail/{id}', [aKonfirmasi::class, 'detail']);
-Route::any('/admin/konfirmasi/acttambah', [aKonfirmasi::class, 'acttambah']);
-Route::any('/admin/konfirmasi/actedit', [aKonfirmasi::class, 'actedit']);
-Route::any('/admin/konfirmasi/acthapus/{id}', [aKonfirmasi::class, 'acthapus']);
+Route::any('/admin/konfirmasi/list', [aKonfirmasi::class, 'list'])->middleware('ceklogin');
+Route::any('/admin/konfirmasi/tambah', [aKonfirmasi::class, 'tambah'])->middleware('ceklogin');
+Route::any('/admin/konfirmasi/detail/{id}', [aKonfirmasi::class, 'detail'])->middleware('ceklogin');
+Route::any('/admin/konfirmasi/acttambah', [aKonfirmasi::class, 'acttambah'])->middleware('ceklogin');
+Route::any('/admin/konfirmasi/actedit', [aKonfirmasi::class, 'actedit'])->middleware('ceklogin');
+Route::any('/admin/konfirmasi/acthapus/{id}', [aKonfirmasi::class, 'acthapus'])->middleware('ceklogin');
 
 // Anggota
-Route::any('/admin/anggota/list', [aAnggota::class, 'list']);
-Route::any('/admin/anggota/verifikasi', [aAnggota::class, 'verifikasi']);
-Route::any('/admin/anggota/verifikasi/detail/{id}', [aAnggota::class, 'verifikasidetail']);
-Route::any('/admin/anggota/informasi', [aAnggota::class, 'informasi']);
-Route::any('/admin/anggota/tambah', [aAnggota::class, 'tambah']);
-Route::any('/admin/anggota/edit/{id}', [aAnggota::class, 'edit']);
-Route::any('/admin/anggota/detail/{id}', [aAnggota::class, 'detail']);
-Route::any('/admin/anggota/acttambah', [aAnggota::class, 'acttambah']);
-Route::any('/admin/anggota/actedit', [aAnggota::class, 'actedit']);
-Route::any('/admin/anggota/actverifikasi', [aAnggota::class, 'actverifikasi']);
-Route::any('/admin/anggota/acthapus/{id}', [aAnggota::class, 'acthapus']);
+Route::any('/admin/anggota/list', [aAnggota::class, 'list'])->middleware('ceklogin');
+Route::any('/admin/anggota/verifikasi', [aAnggota::class, 'verifikasi'])->middleware('ceklogin');
+Route::any('/admin/anggota/verifikasi/detail/{id}', [aAnggota::class, 'verifikasidetail'])->middleware('ceklogin');
+Route::any('/admin/anggota/informasi', [aAnggota::class, 'informasi'])->middleware('ceklogin');
+Route::any('/admin/anggota/tambah', [aAnggota::class, 'tambah'])->middleware('ceklogin');
+Route::any('/admin/anggota/edit/{id}', [aAnggota::class, 'edit'])->middleware('ceklogin');
+Route::any('/admin/anggota/detail/{id}', [aAnggota::class, 'detail'])->middleware('ceklogin');
+Route::any('/admin/anggota/acttambah', [aAnggota::class, 'acttambah'])->middleware('ceklogin');
+Route::any('/admin/anggota/actedit', [aAnggota::class, 'actedit'])->middleware('ceklogin');
+Route::any('/admin/anggota/actverifikasi', [aAnggota::class, 'actverifikasi'])->middleware('ceklogin');
+Route::any('/admin/anggota/acthapus/{id}', [aAnggota::class, 'acthapus'])->middleware('ceklogin');
 
 // Kunjungan
-Route::any('/admin/kunjungan/list', [aKunjungan::class, 'list']);
-Route::any('/admin/kunjungan/tambah', [aKunjungan::class, 'tambah']);
-Route::any('/admin/kunjungan/acttambah', [aKunjungan::class, 'acttambah']);
-Route::any('/admin/kunjungan/acthapus/{id}', [aKunjungan::class, 'acthapus']);
+Route::any('/admin/kunjungan/list', [aKunjungan::class, 'list'])->middleware('ceklogin');
+Route::any('/admin/kunjungan/tambah', [aKunjungan::class, 'tambah'])->middleware('ceklogin');
+Route::any('/admin/kunjungan/acttambah', [aKunjungan::class, 'acttambah'])->middleware('ceklogin');
+Route::any('/admin/kunjungan/acthapus/{id}', [aKunjungan::class, 'acthapus'])->middleware('ceklogin');
 
 // Laporan
 Route::any('/admin/laporan/anggota', [aLaporan::class, 'anggota'])->middleware('ceklogin');

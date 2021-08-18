@@ -154,6 +154,7 @@ class aAlatGym extends Controller
 	            ->where('kodealatgym', "=", $id)
 	            ->update
 	            ([
+	            	'kodeadmin' => Cfilter::FilterString(session("kodeadmin")),
 		            'namaalatgym' => Cfilter::FilterString($request->input('namaalatgym')),
 		            'keteranganalatgym' => $request->input('keteranganalatgym'),
                 	'gambaralatgym' => $gambaralatgym,
